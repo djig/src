@@ -2,12 +2,12 @@
   return {
       restrict: 'EA',
       scope: {
-          options: '=',       // The typeahead configuration options (https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#options)
-          vals: '='       // The typeahead datasets to use (https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#datasets)
+          options: '=',
+          vals: '='
       },
       templateUrl: "partials/_asOfDate.html",
         link: function(scope, element, attr) {
-          var gmonth = new Array();
+          var gmonth = [] ;
           gmonth[0] = "Jan";
           gmonth[1] = "Feb";
           gmonth[2] = "Mar";
