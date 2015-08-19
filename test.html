@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="css/bootstrap3.css" />
+ 
+
+<style>
+
+ /*D3JS asof Date Dirctive related CSS*/
+ .zoomAsOfDate{
+   zoom:0.80;
+ }
+ .svgWraper{
+   -webkit-transform: rotateX(-50deg) skew(15deg,10deg);
+   box-shadow: -2px 2px 2px rgba( 0, 0, 0, 0.6 );
+ border-radius: 100px;
+ border-width: 0px;
+ border-style: solid;
+ border-color: rgba(0, 0, 0, 0.08);
+ background-color: rgba(255, 255, 255, 0.51);
+ }
+ .marg{
+     margin-left: -140px;
+ }
+ .margA{
+     margin-left: -60px;
+
+     -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+     -o-transition: all 1s ease;
+     transition: all 1s ease;
+ }
+ .svgWraper:hover{
+   -webkit-transform: rotateX(0deg) skew(0deg,0deg);
+   background-color: white;
+   border-width: 1px;
+   z-index: 99999;
+   -webkit-transition: all 1s ease;
+   -moz-transition: all 1s ease;
+   -o-transition: all 1s ease;
+   transition: all 1s ease;
+ }
+
+</style>
+<body ng-app="ddApp">
+
+
+<div class="container">
+  <div class="row zoomAsOfDate">
+    <div  id="d3_0" class="col-md-2 col-lg-2 mainC2 ">
+      <d3-Aot id='main2011' options={year:2011,factor:.94,isActive:0} vals=[0,0,0,0,0,0,0,0,0,0,0,110]></d3-Aot>
+    </div>
+      <div id="d3_1" class="col-md-2 mainC2 marg">
+          <d3-Aot id='main2012' options={year:2012,factor:0.95,isActive:0} vals=[119.2,55,119,119,119,119,119,119,100,119,119,130]></d3-Aot>
+      </div>
+      <div id="d3_2" class="col-md-2  mainC2 marg">
+        <d3-Aot id='main2013' options={year:2013,factor:.96,isActive:0} vals=[4,5,6,4,5,6,7,8,3,2,2,7]></d3-Aot>
+      </div>
+      <div id="d3_3" class="col-md-2  mainC2 marg">
+        <d3-Aot id='main2014' options={year:2014,factor:.98,isActive:0} vals=[4,5,6,4,5,6,7,8,3,2,2,7]></d3-Aot>
+      </div>
+      <div  id="d3_4" class="col-md-2  mainC2 marg">
+        <d3-Aot id='main2015' options={year:2015,factor:1,isActive:1,activeMonth:'Jul'} vals=[119,55,119,119,119,119,119,0,0,0,0,0]></d3-Aot>
+      </div>
+  </div>
+</div>
+
+
+
+
+    <!-- Third Party JS Lib  -->
+    <script type="text/javascript" src="js/vendor/jQuery1.9-min.js"></script>
+    <script type="text/javascript" src="js/vendor/angular1.3.5-min.js"></script>
+    <script type="text/javascript" src="js/Vendor/angular-resource.min.js"></script>
+    <script type="text/javascript" src="js/vendor/angular-route.min.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.3.15/angular-mocks.js"></script>
+
+
+    <script src="js/Vendor/ui-grid.js"></script>
+    <script src="js/Vendor/Raphael/Raphael.js"></script>
+    <script src="js/Vendor/Raphael/gRahael.js" type="text/javascript"></script>
+    <script src="js/Vendor/Raphael/g.bar.js" type="text/javascript"></script>
+    <script src="js/Vendor/Raphael/g.dots.js" type="text/javascript"></script>
+    <script src="js/Vendor/Raphael//g.pie.js" type="text/javascript"></script>
+      <script src="https://cdn.jsdelivr.net/jasmine/1.3.1/jasmine.js" ></script>
+        <script src="https://cdn.jsdelivr.net/jasmine/1.3.1/jasmine-html.js" ></script>
+
+
+    <script type="text/javascript" src="js/Typehead/TypeHeadBundle.js"></script>
+    <script type="text/javascript" src="js/Vendor/handlebars.js"></script>
+    <script type="text/javascript" src="js/Vendor/Highcharts.js"></script>
+    <script type="text/javascript" src="js/Vendor/HighCharts-more.js"></script>
+    <script type="text/javascript" src="js/Vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="js/Vendor/d3.v3.min.js"></script>
+    <script type="text/javascript" src="js/Vendor/avgrund.js"></script>
+
+    <!--Angular Application Specific  -->
+    <script src="js/app.js"></script>
+    <script src="js/app_Provider.js"></script>
+    <script src="js/app_Service.js"></script>
+    <script src="js/app_factory.js"></script>
+
+    <!--Angular Application Config and Routing  -->
+    <script src="js/app_Config.js"></script>
+    <script src="js/app_Routes.js"></script>
+
+    <!--Functionality related Controllers and Directives  -->
+    <script src="js/clientPage/clientController.js"></script>
+    <script src="js/Utility/ngCustomUIDirective.js"></script>
+    <script src="js/clientPage/cMvSummaryDirective.js"></script>
+    <script src="js/D3AsOfDate/asOfDateDirective.js"></script>
+
+
+    <script src="js/header/hlDirective.js"></script>
+    <script src="js/Typehead/adTypeahead.js"></script>
+    <script src="js/Typehead/sbDirective.js"></script>
+    <script>
+    $(document).ready(function(){
+
+      $(".mainC2").hover(function () {
+          d3AsOfMouseLeave(this);
+        //stuff to do on mouse enter
+        if($(this).attr("class").indexOf('marg')>-1 ){
+             console.log("ji" );
+            $("this").addClass("margA");
+            var id= $(this).attr("id");
+            console.log($("#"+id+" ~ .mainC2")[0]);
+            var nextElement=$("#"+id+" ~ .mainC2")[0];
+              $(nextElement).addClass("margA");
+            //$("#"+id+" ~ .mainC2").addClass("margA");
+        }
+        else{
+           $(".mainC2:nth-child(2)").addClass("margA");
+        }
+      },
+      function () {
+            d3AsOfMouseLeave(this);
+          });
+    });
+    function d3AsOfMouseLeave(e){
+      //stuff to do on mouse leave
+        $(e).removeClass("margA");
+        $(".mainC2:nth-child(2)").removeClass("margA",1000);
+        var id= $(e).attr("id");
+        $("#"+id+" ~ .mainC2").removeClass("margA",1000);
+    }
+
+
+
+    </script>
+
+    </script>
+
+</body>

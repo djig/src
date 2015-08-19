@@ -1,0 +1,149 @@
+﻿.clientsTabs{
+      font-size: 11px;
+  text-align: right;
+  padding: 10px;
+}
+
+.clientsTabs>li {
+  float: left;
+  /*width: 130px;
+    border-left: 1px solid rgba(129, 187, 129,.8);*/
+    margin-right: 14px;
+      width: 130px;
+  height: 35px;
+  /*border-left: 5px solid rgba(0, 119, 253, 0.8);*/
+  background-color: rgba(255,255,255,.9);
+    border-radius: 5px;
+}
+
+.clientsTabs>li>a
+{
+    color: rgba(0,0,0,.91);
+      background-color: rgba(218, 218, 218, 0.8);
+
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 8px;
+  text-align: right;
+  /* text-decoration: overline; */
+  /* text-indent: initial; */
+  border-radius: 10px;
+  letter-spacing: 4px;
+  text-shadow: linen;
+  /* text-transform: uppercase; */
+  /*background: linear-gradient(-30deg, rgba(174, 186, 174,.8) 0%, rgba(174, 186, 174,.6) 10%,rgba(174, 186, 174,.5) 20%, rgba(174, 186, 174,.6) 40%, rgba(174, 186, 174,.8) 60%,#FFFFFF 100%);*/
+  border: 1px solid rgba(0,0,0,.01);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+.clientsTabs>li.active>a, .clientsTabs>li.active>a:hover, .clientsTabs>li.active>a:focus {
+/*color: rgba(0,0,0,.91);
+  background-color: rgba(129, 187, 129,.8);
+  padding: 10px;
+  font-size: 12px;
+  text-align: right;
+
+  text-indent: initial;
+  border-radius: 10px;
+  letter-spacing: 4px;
+
+  background: linear-gradient(-30deg, rgba(129, 187, 129,.8) 0%, rgba(129, 187, 129,.6) 10%,rgba(129, 187, 129,.5) 20%, rgba(129, 187, 129,.6) 40%, rgba(129, 187, 129,.8) 60%,#FFFFFF 100%);
+  border: 1px solid rgba(0,0,0,.01);*/
+
+
+
+
+
+color: rgba(0,0,0,.91);
+   
+     background-color: rgba(129, 187, 129,.8);
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 8px;
+  text-align: right;
+  /* text-decoration: overline; */
+  /* text-indent: initial; */
+  border-radius: 10px;
+  letter-spacing: 4px;
+  text-shadow: linen;
+  /* text-transform: uppercase; */
+  /*background: linear-gradient(-30deg, rgba(129, 187, 129,.8) 0%, rgba(129, 187, 129,.6) 10%,rgba(129, 187, 129,.5) 20%, rgba(129, 187, 129,.6) 40%, rgba(129, 187, 129,.8) 60%,#FFFFFF 100%);*/
+  border: 1px solid rgba(0,0,0,.01);
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+
+
+
+
+
+}
+
+ .sactive{
+      padding-left: 12px;
+   width: 110px;
+  margin-top: -20px;
+  display: inline-block;
+  text-align: center;
+  font-weight: 600;
+  /* text-decoration: underline; */
+  font-size: 9px;
+}
+  .clientsTabs>li:hover {
+    color: red;
+}
+
+ .bgTabNumActive{
+       margin-top: -25px;
+  padding-left: 40px;
+  color:    rgba(29, 197, 31, 0.6);
+  font-size: 25px;
+  -webkit-filter: blur(1px);
+  /* font-weight: 700; */
+  letter-spacing: 2px;
+ }
+
+ .bgTabNum{
+       margin-top: -25px;
+  padding-left: 40px;
+  color: rgba(223, 210, 210, 0.45);
+  font-size: 25px;
+  /*-webkit-filter: blur(1px);*/
+  /* font-weight: 700; */
+  letter-spacing: 2px;
+ }
+
+.clDiv .table-striped>tbody>tr:nth-child(odd) {
+  background-color: transparent;
+}
+.tabAnim{
+    width: 22px;
+  height: 22px;
+  position: absolute;
+  z-index: 2;
+  background-color: rgb(61, 224, 131);
+  border-radius: 50%;
+  top: 66px;
+  left: 53px;
+}
+
+@-webkit-keyframes tabAnimation {
+	0%, 100% {
+		 left: 0; }
+ 
+	50% { left: 80px;
+	}
+	100% {
+		left: 140px;
+		 opacity:0;
+	}
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,198 @@
+﻿<div class="row">1
+    <div class="col-lg-12">
+  <div id="clientSummaryHeader" class="ClientSummaryHeader   row">
+            <div id="clientSummaryR1C1" class="ContactcomapnyHeader col-lg-2">
+                {{adminDS.ClientName}}
+            </div>
+            <div class="col-lg-2">
+                <div id="clientSummaryR2C1" class="ColHeader">
+                    RM:<span class="ColVal">{{adminDS.RM}}</span>
+                </div>
+                <div id="clientSummaryR3C1" class="ColHeader">
+                    CSR: <span class="ColVal">{{adminDS.CSR}}</span>
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                <div id="clientSummaryR9C1" class="ColHeader">
+                </div>
+                <div id="clientSummaryR10C1" class="ColHeader">
+
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div id="clientSummaryR6C2" class="ColHeader">
+                </div>
+                <div id="clientSummaryR6C1" class="ColVal">
+                </div>
+            </div>
+
+            <div class="col-lg-1">
+                <div id="tAssets" class="ColHeader">
+                </div>
+                <div id="clientSummaryR4C1" class="clientSummaryR4C1 ColVal">
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div id="tRevenue" class="ColHeader">
+                </div>
+                <div id="clientSummaryR5C1" class="ColVal">
+                </div>
+            </div>
+
+            <div class="col-lg-1">
+                <div id="clientSummaryR7C1" class="ColHeader">
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div id="clientSummaryR8C1" class="ColHeader">
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div id="clientSummaryMVTitle" class="clientSummaryMVTitleNew">
+            Market Value
+        </div>
+        <!-- Tabs Go Here -->
+        <section class="BoxesInnerContacts clDiv">
+            <div id="tabAnimation" class="tabAnim"></div>
+            <ul id="clmvtab" class="nav nav-pills clientsTabs">
+                <li ng-class="{active:isSet(1)}">
+                    <a href ng-click="setTab(1)">
+                        <span class="sactive">Contract</span>
+                        <div class="bgTabNumActive">{{contLen}}</div>
+                    </a>
+                </li>
+                <li   ng-class="{ active:isSet(2) }">
+                    <a href ng-click="setTab(2)">
+                        <span class="sactive">Strategy</span>
+                        <div class="bgTabNum">{{strategyLen}}</div>
+                    </a>
+                </li>
+                <li   ng-class="{ active:isSet(3) }">
+                    <a href ng-click="setTab(3)">
+                        <span class="sactive">Asset Class</span>
+                        <div class="bgTabNum">{{assetClassLen}}</div>
+                    </a>
+
+                </li>
+            </ul>
+
+            <!--  Contract Tab  -->
+            <div id="clientSummaryInner" ng-show="isSet(1)">
+
+
+
+                    <div class="row ContractSummaryROwSearchResultHeader">
+                        <div class="col-lg-5 ContractName">
+                            Contract Name&nbsp;
+                        </div>
+
+                        <div class="col-lg-2 mv">
+                            MV&nbsp;
+                        </div>
+                        <div class="col-lg-4 startdate">
+                             Start Date&nbsp;
+                        </div>
+                        <div class="col-lg-1 description">
+                            &nbsp;
+                        </div>
+
+                    </div>
+                <div  class="tblRows">
+                    <div ng-repeat="item in ContractSummary  | orderBy:sort.sortingOrder:sort.reverse" class="row ContractSummaryAlternateROw">
+                        <div class="col-lg-5">
+                            {{item.name}}
+                        </div>
+                        <div class="col-lg-2">
+                            {{item.mv}}
+                        </div>
+                        <div class="col-lg-2">
+                            {{item.startdate}}
+                        </div>
+
+
+                        <div class="col-lg-3 description">
+                            {{item.description}}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                </div>
+
+            <!--  Strategy  -->
+            <div id="clientSummaryInnerStrategy" ng-show="isSet(2)">
+                <mvsummary columns="strategyCols" datasets="StrategySummary"></mvsummary>
+            </div>
+
+            <!--  Asset Class -->
+            <div id="clientSummaryInnerAccount" ng-show="isSet(3)">
+                <mvsummary columns="assetCols" datasets="AssetSummary"></mvsummary>
+            </div>
+
+        </section>
+
+
+
+
+
+
+
+</div>
+    <div class="col-lg-6">
+        <!--<div id="clientSummaryTitle" class="clientSummaryMVTitleNew">
+            Contacts
+        </div>
+        <table class="table table-striped table-condensed table-hover">
+            <thead>
+
+                <tr class="ContractSummaryROwSearchResultHeader">
+                    <th class="person_name" ng-table order="'person_name'" sort="sort"> Name&nbsp;</th>
+                    <th class="person_company_name" ng-table order="'person_company_name'" sort="sort">Company&nbsp;</th>
+                    <th class="e_mail_address" ng-table order="'e_mail_address'" sort="sort">E Mail&nbsp;</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in clientsContacts  | orderBy:sort.sortingOrder:sort.reverse" class="ContractSummaryAlternateROw">
+                    <td>{{item.person_name}}</td>
+                    <td>{{item.person_company_name}}</td>
+                    <td>{{item.e_mail_address}}</td>
+
+
+                </tr>
+            </tbody>
+
+
+        </table>-->
+
+
+    </div>
+    </div>
+
+
+
+
+    <button ng-click="popUp()">Click</button>
+
+    <div id="clientDetailsPopUp" class="avgrund-popup">
+
+        <p>
+            You can hit ESC or click outside to close the modal. Give it a go to see the reverse transition.
+        </p>
+
+        <button ng-click="closeclientDetailsPopUp(); ">Close</button>
+    </div>

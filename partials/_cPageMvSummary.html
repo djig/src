@@ -1,0 +1,39 @@
+﻿
+
+<div class="row ContractSummaryROwSearchResultHeader">
+    <div class="col-lg-5 ContractName">
+        {{columns[0]}}&nbsp;
+    </div>
+
+    <div class="col-lg-2 mv">
+        {{columns[1]}}&nbsp;
+    </div>
+    <div class="col-lg-4 startdate">
+        {{columns[2]}}&nbsp;
+    </div>
+    <div class="col-lg-1 description">
+        &nbsp;
+    </div>
+
+</div>
+<div class="tblRows">
+    <div ng-repeat="item in datasets  | orderBy:sort.sortingOrder:sort.reverse" class="row ContractSummaryAlternateROw">
+        <div class="col-lg-5">
+            {{item.name}}
+        </div>
+        <div class="col-lg-2">
+            {{item.mv}}
+        </div>
+        <div class="col-lg-2">
+            {{item.startdate}}
+        </div>
+
+
+        <div class="col-lg-3 description">
+            {{item.description}}
+        </div>
+
+    </div>
+
+</div>
+

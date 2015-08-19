@@ -1,0 +1,54 @@
+﻿ 
+
+.ContractSummaryROwSearchResultHeader
+{
+ 
+    font-family: Helvetica;
+    font-size: 11px;
+    color:white;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 20px;
+ 
+    background-color: rgba(228, 228, 228, 0.5);
+    margin-left: -10px;
+    margin-right: 0px;
+    border-radius:5px;
+}
+
+.tblRows{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 130px;
+    
+    border-radius: 5px;
+ }
+
+.ContractSummaryAlternateROw
+{
+    background-color: transparent;
+    font-family: Helvetica;
+    font-size: 11px;
+    color: rgb(10, 10, 11);
+    font-weight: 400;
+    padding: 5px; 
+    letter-spacing: 1px;
+
+}
+
+
+.ContractSummaryAlternateROw:hover
+{
+    cursor:pointer;
+    font-size: 11px;
+    color: white;
+    background-color:black;
+    letter-spacing: 2px;
+}
+.ClientMVs
+{
+ 
+ 
+ height:90px;
+
+}

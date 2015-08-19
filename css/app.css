@@ -1,0 +1,57 @@
+/* app css stylesheet */
+
+ .appContainer{
+       border-radius: 8px;
+  background: -webkit-linear-gradient(top, rgba(220,234,252,.6), #FFFFFF, #FFFFFF 70%, #FFFFFF);
+  border-style: solid;
+  border-color: rgba(0,0,0,.06);
+  border-width: 1px;
+  padding: 10px;
+ }
+
+ .bar-show-hide {
+   -webkit-transition: all 1s ease;
+   -moz-transition: all 1s ease;
+   -o-transition: all 1s ease;
+   transition: all 1s ease;
+ }
+
+ .bar-show-hide.ng-hide {
+   opacity:0;
+ }
+
+ /*D3JS asof Date Dirctive related CSS*/
+ .zoomAsOfDate{
+   zoom: 0.70;
+   margin-top: -35px;
+ }
+ .svgWraper{
+   -webkit-transform: rotateX(-50deg) skew(15deg,10deg);
+   box-shadow: -2px 2px 2px rgba( 0, 0, 0, 0.6 );
+ border-radius: 100px;
+ border-width: 0px;
+ border-style: solid;
+ border-color: rgba(0, 0, 0, 0.08);
+ background-color: rgba(255, 255, 255, 0.51);
+ }
+ .marg{
+     margin-left: -180px;
+ }
+ .margA{
+     margin-left: -100px;
+
+     -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+     -o-transition: all 1s ease;
+     transition: all 1s ease;
+ }
+ .svgWraper:hover{
+   -webkit-transform: rotateX(0deg) skew(0deg,0deg);
+   background-color: white;
+   border-width: 1px;
+   z-index: 99999;
+   -webkit-transition: all 1s ease;
+   -moz-transition: all 1s ease;
+   -o-transition: all 1s ease;
+   transition: all 1s ease;
+ }
