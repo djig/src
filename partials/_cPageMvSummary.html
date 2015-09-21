@@ -17,23 +17,27 @@
 
 </div>
 <div class="tblRows">
-    <div ng-repeat="item in datasets  | orderBy:sort.sortingOrder:sort.reverse" class="row ContractSummaryAlternateROw">
-        <div class="col-lg-5">
-            {{item.name}}
+    <div  ng-repeat="item in datasets  | orderBy:sort.sortingOrder:sort.reverse" class="row ContractSummaryAlternateROw">
+        <div    class="col-lg-5">
+ 
+          <a href ng-click="popUp($event,item.name )">
+              <span >{{item.name}}</span>
+
+          </a>
+
         </div>
-        <div class="col-lg-2">
+        <div   class="col-lg-2">
             {{item.mv}}
         </div>
-        <div class="col-lg-2">
+        <div   class="col-lg-2">
             {{item.startdate}}
         </div>
 
 
-        <div class="col-lg-3 description">
+        <div  class="col-lg-3 description">
             {{item.description}}
         </div>
 
     </div>
 
 </div>
-

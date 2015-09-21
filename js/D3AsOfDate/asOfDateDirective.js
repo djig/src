@@ -3,10 +3,12 @@
       restrict: 'EA',
       scope: {
           options: '=',
-          vals: '='
+          vals: '=',
+          lables: '='
       },
       templateUrl: "partials/_asOfDate.html",
         link: function(scope, element, attr) {
+
           var gmonth = [] ;
           gmonth[0] = "Jan";
           gmonth[1] = "Feb";
@@ -72,13 +74,15 @@
             ];
             var date1 = new Date();
 
-
+            var dr = 200;
          var options = scope.options;
+         var width = options.width !== undefined?options.width: 180,
+           height = options.height !== undefined?options.height: 180;
+         var acitiveLabel=options.acitiveLabel !==undefined?options.acitiveLabel:'';
            var zfactor=options.factor !== undefined?options.factor: 1;
            var activeMonth=options.activeMonth !== undefined?options.activeMonth:'';
            var svgWraper=$("#"+element[0].id +" .svgWraper");
-        //   console.log(svgWraper);
-           $(svgWraper).css({
+                  $(svgWraper).css({
              height:180*zfactor,
              width:180*zfactor,
              'margin-top':180-(180*zfactor)
@@ -90,29 +94,36 @@
            ];
 
               var vals = scope.vals;
+            //  console.log(vals);
+                var lables = scope.lables;
             for (i = 0; i < 12; i++) {
                 var objCircle = {};
                 objCircle.id = i;
                 var iR;
                 iR = i + 3;
                 if (iR > 11) { iR = iR - 12; }
+                var vl=0;
+                if(vals[iR]!==undefined){
+                  vl=vals[iR];
+                }
 
+                var multiplier =   (vl / (Math.max.apply(Math, vals)))*1.1;
 
-                var multiplier =   (vals[iR] / (Math.max.apply(Math, vals)))*1.1;
-                //console.log(vals[iR]);
                 //console.log(multiplier);
                 objCircle.radius = 12 * multiplier*zfactor;
                 //console.log(objCircle.radius);
                 objCircle.angle = (Math.PI * i)/6;
                 objCircle.cos = Math.cos(objCircle.angle);
                 objCircle.sin = Math.sin(objCircle.angle);
-                objCircle.mv = '$'+ vals[i]+'MM';
+
+                objCircle.mv = lables[i];
                 objCircle.x = (90 + (50 * Math.cos(objCircle.angle) )) *zfactor;
                 objCircle.y = (90 + (50 * Math.sin(objCircle.angle)))*zfactor;
                 var color=appcolors[i+1];
                 objCircle.selected=false;
-                if(activeMonth===gmonth[iR]){
-                    color="Red";
+
+                if(acitiveLabel!=="" && parseInt(acitiveLabel.split('/')[0])-1 ===iR){
+                  //  color="Red";
                     //console.log(color);
                     objCircle.selected=true;
 
@@ -121,14 +132,14 @@
                 objCircle.color = color;
                arrCircle.push(objCircle);
             }
-            var dr = 200;
 
 
-            var width = options.width !== undefined?options.width: 180,
-              height = options.height !== undefined?options.height: 180;
+
+
 
               scope.width=width;
-          var svg2 = d3.select("#"+element[0].id +" .mainC2").append("svg")
+             // var svg2 = d3.select("#"+element[0].id +">.mainC2").append("svg")
+           var svg2 = d3.select(element.find('.mainC2')[0]).append("svg")
               .attr("width", 180*zfactor)
               .attr("height", 180*zfactor);
             svg2.selectAll("circle")
@@ -142,23 +153,44 @@
                   var iR;
                   iR = d.id + 3;
                   if (iR > 11) { iR = iR - 12; }
+                  var zlx2=0;
+                  var zly2=0;
+                  var zsw=0;
+                  //console.log(d);
+                  zlx2=d.x;
+                  zly2=d.y;
+                  zsw=1;
 
-                      scope.$emit('asofDateEventClick',gmonth[iR],options.year);
+
+                     d3.selectAll("#line2").attr("x1", 90)
+                         .attr("y1", 90)
+                        .attr("x2", 90)
+                       .attr("y2",90)
+                       .attr("stroke", 'rgba(255,0,0,.5)')
+                       .attr("stroke-width", 1);
+
+                       svg2.selectAll("#line2").attr("x1", 90)
+                           .attr("y1", 90)
+                          .attr("x2", zlx2)
+                         .attr("y2", zly2)
+                         .attr("stroke", 'rgba(255,0,0,.5)')
+                         .attr("stroke-width", 1);
+                      scope.$emit('asofDateEventClick',[ iR ,options.year]);
                       zoomC(d, d.id, 'mi');
                     })
                 .on("mouseover", function (d) {
                       var date2 = new Date();
                       var diff =  date2   - date1 ;
-                    //  console.log(diff/1000 );
+
                       if((diff/1000)>2){
-                        zoomC(d,d.id,'mi');
+                         zoomC(d,d.id,'mi');
                       }
 
                    })
                 .on("mouseout", function (d) {
                   var date2 = new Date();
                   var diff =  date2   - date1 ;
-                //  console.log(diff/1000 );
+
                   if((diff/1000)>2){
                       zoomC(d, d.id, 'mo');
                   }
@@ -340,14 +372,23 @@
                                   .attr("y1", 90)
                                  .attr("x2", 90)
                                 .attr("y2", 90)
-                                .attr("stroke", 'rgba(255,0,0,0.5)')
-                               .attr("stroke-width", 0);
+                                .attr("stroke", 'rgba(0,255,0,0.5)')
+                               .attr("stroke-width",0  ).attr("id","line1");
+             var ln2 = svg2.append("line")
+                                 .attr("x1", 90)
+                                 .attr("y1", 90)
+                                .attr("x2", lx2)
+                               .attr("y2", ly2)
+                               .attr("stroke", 'rgba(255,0,0,0.5)')
+                              .attr("stroke-width",sw  ).attr("id","line2");
             }
             function zoomC(d, i, mode) {
 
+                //
+                // var t = svg2.transition()
+                //     .duration(d3.event.altKey ? 7500 : 750);
 
-                var t = svg2.transition()
-                    .duration(d3.event.altKey ? 7500 : 750);
+                    var t = svg2 ;
                 t.selectAll("circle")
                   .attr("r", function (d) {
                         return d.radius;
@@ -397,18 +438,18 @@
                     var zlx2=0;
                     var zly2=0;
                     var zsw=0;
-                    console.log(d);
+                    //console.log(d);
                     zlx2=d.x;
                     zly2=d.y;
                     zsw=1;
 
 
 
-               t.selectAll("line").attr("x1", 90)
+               t.selectAll("#line1").attr("x1", 90)
                    .attr("y1", 90)
                   .attr("x2", zlx2)
                  .attr("y2", zly2)
-                 .attr("stroke", 'rgba(255,0,0,0.5)')
+                 .attr("stroke", 'rgba(0,255,0,1)')
                  .attr("stroke-width", function(){
                      if ( mode==='mi'   ){
                        return 1;
@@ -419,8 +460,25 @@
 
                      }
                  });
+                //  t.selectAll("#line2")
+                //  .attr("stroke-width", function(){
+                //        if ( mode==='mi'   ){
+                //          return 0;
+                //        }
+                //         else {
+                 //
+                //           return 1;
+                 //
+                //        }
+                //    });
+
+
 
               var txt=  t.selectAll("text")
+                          .transition()
+                          .duration(function (d) {
+                            return 450;
+                          })
                           .text(function (d) {
                             if (d.id === -2 && mode==='mi'  ){
                               var iR;
@@ -517,7 +575,7 @@
                        return "rgba(0,0,255,.6)";
                  }
                  })
-                 .style('opacity', function(d){
+                  .style('opacity', function(d){
                     if (mode === 'mi' || d.id === -1 ){
                       return 1;
                     }

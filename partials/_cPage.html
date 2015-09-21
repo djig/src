@@ -1,51 +1,68 @@
-﻿<div class="row">1
+﻿<div class="row">
     <div class="col-lg-12">
+      <div class="alert alert-danger" ng-show="!bData">loading client Data....</div>
+
   <div id="clientSummaryHeader" class="ClientSummaryHeader   row">
-            <div id="clientSummaryR1C1" class="ContactcomapnyHeader col-lg-2">
+            <div  class="ContactcomapnyHeader col-lg-3">
                 {{adminDS.ClientName}}
             </div>
             <div class="col-lg-2">
                 <div id="clientSummaryR2C1" class="ColHeader">
                     RM:<span class="ColVal">{{adminDS.RM}}</span>
                 </div>
-                <div id="clientSummaryR3C1" class="ColHeader">
+                <div   class="ColHeader">
                     CSR: <span class="ColVal">{{adminDS.CSR}}</span>
                 </div>
             </div>
 
-            <div class="col-lg-2">
-                <div id="clientSummaryR9C1" class="ColHeader">
+            <div class="col-lg-1">
+                <div class="ColHeader">
+                DSR
                 </div>
-                <div id="clientSummaryR10C1" class="ColHeader">
-
+                <div   class="ColVal">
+                    {{DSR!==undefined?DSR:'Loading..'}}
                 </div>
             </div>
             <div class="col-lg-1">
-                <div id="clientSummaryR6C2" class="ColHeader">
+                <div class="ColHeader">
+                AsOfDate
                 </div>
-                <div id="clientSummaryR6C1" class="ColVal">
+                <div   class="ColVal">
+                  {{asofdate}}
                 </div>
             </div>
+
 
             <div class="col-lg-1">
                 <div id="tAssets" class="ColHeader">
+                    Assets
                 </div>
-                <div id="clientSummaryR4C1" class="clientSummaryR4C1 ColVal">
+                <div   class="asColNum ColVal">
+                  {{totalMV!==undefined?totalMV:'Loading..'}}
                 </div>
             </div>
             <div class="col-lg-1">
-                <div id="tRevenue" class="ColHeader">
+                <div   class="ColHeader">
                 </div>
-                <div id="clientSummaryR5C1" class="ColVal">
+                <div  class="ColVal">
                 </div>
             </div>
 
             <div class="col-lg-1">
-                <div id="clientSummaryR7C1" class="ColHeader">
+                <div   class="ColHeader">
+                  Watch List
+                </div>
+                <div  class="ColVal">
+                    {{watch_list_rank!==undefined?watch_list_rank:'Loading..'}}
                 </div>
             </div>
             <div class="col-lg-1">
-                <div id="clientSummaryR8C1" class="ColHeader">
+                <div   class="ColHeader">
+                  Client Tier Level
+                </div>
+                <div   class="ColVal">
+
+                  {{client_tier_level!==undefined?client_tier_level:'Loading..'}}
                 </div>
             </div>
 
@@ -110,7 +127,12 @@
                 <div  class="tblRows">
                     <div ng-repeat="item in ContractSummary  | orderBy:sort.sortingOrder:sort.reverse" class="row ContractSummaryAlternateROw">
                         <div class="col-lg-5">
-                            {{item.name}}
+                          <a href ng-click="popUp($event,item.custodiancode )">
+                              <span >{{item.name}}</span>
+
+                          </a>
+
+
                         </div>
                         <div class="col-lg-2">
                             {{item.mv}}
@@ -144,55 +166,94 @@
 
         </section>
 
+ </div>
+<div class="col-lg-6">
 
-
-
+        <client-Admin></client-Admin>
 
 
 
 </div>
-    <div class="col-lg-6">
-        <!--<div id="clientSummaryTitle" class="clientSummaryMVTitleNew">
-            Contacts
-        </div>
-        <table class="table table-striped table-condensed table-hover">
-            <thead>
 
-                <tr class="ContractSummaryROwSearchResultHeader">
-                    <th class="person_name" ng-table order="'person_name'" sort="sort"> Name&nbsp;</th>
-                    <th class="person_company_name" ng-table order="'person_company_name'" sort="sort">Company&nbsp;</th>
-                    <th class="e_mail_address" ng-table order="'e_mail_address'" sort="sort">E Mail&nbsp;</th>
-
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in clientsContacts  | orderBy:sort.sortingOrder:sort.reverse" class="ContractSummaryAlternateROw">
-                    <td>{{item.person_name}}</td>
-                    <td>{{item.person_company_name}}</td>
-                    <td>{{item.e_mail_address}}</td>
-
-
-                </tr>
-            </tbody>
-
-
-        </table>-->
-
-
-    </div>
-    </div>
+</div>
 
 
 
-
-    <button ng-click="popUp()">Click</button>
-
+    <div id="d3Navline" ng-click="closeclientDetailsPopUp(); " style="position:absolute;top:0px;left:0px;  z-index:3" />
     <div id="clientDetailsPopUp" class="avgrund-popup">
+      <!--  Contract Tab  -->
 
-        <p>
-            You can hit ESC or click outside to close the modal. Give it a go to see the reverse transition.
-        </p>
+<br>
+<br>
 
-        <button ng-click="closeclientDetailsPopUp(); ">Close</button>
+
+              <div class="row ContractSummaryROwSearchResultHeader">
+                  <div class="col-lg-2 custodian_acct_no">
+
+                  </div>
+
+                  <div class="col-lg-3 entity_long_name">
+
+                  </div>
+                  <div class="col-lg-1 acct_vehicle">
+
+                  </div>
+                  <div class="col-lg-1 acct_inception_date">
+                      &nbsp;Inception Date
+                  </div>
+                  <div class="col-lg-1 base_mkt_val">
+                      &nbsp;Market Value
+                  </div>
+                  <div class="col-lg-4">
+                      &nbsp;Fee Structure
+                  </div>
+
+              </div>
+          <div  class="tblRowsPopUp">
+              <div ng-repeat="item in filteredaccounts  | orderBy:sort.sortingOrder:sort.reverse" class="row ContractSummaryAlternateROw">
+                  <div class="col-lg-2">
+                        {{item.DistributionEntity.parent_custodian_acct_no }}
+                        {{item.DistributionEntity.acct_vehicle !=="Separately Managed"?"-":""}}
+                        {{item.DistributionEntity.custodian_acct_no }}
+                  </div>
+                  <div class="col-lg-3">
+                    {{item.DistributionEntity.entity_name }}-
+                      {{item.DistributionEntity.entity_long_name }}
+                      <br>
+                      Strategy : {{item.DistributionEntity.product_id }}
+                      <br>
+                      Benchmark : {{item.DistributionEntity.Banchmark }}
+                  </div>
+                  <div class="col-lg-1">
+                      {{item.DistributionEntity.acct_vehicle }}
+                  </div>
+
+
+                  <div class="col-lg-1">
+                       {{item.DistributionEntity.acct_inception_date }}
+                  </div>
+                  <div class="col-lg-1 ">
+                       {{item.DistributionEntity.mv }}
+                  </div>
+                  <div class="col-lg-4 ">
+                          <div ng-repeat="feeitem in item.FeeStructure   " class="row feeStructureRow">
+                            <div class="col-lg-11">
+                                {{ feeitem.tierendWithMV}} - {{feeitem.tierend!==null? feeitem.tierendWithMV :'$∞'}}
+                                &nbsp;&nbsp;
+                                {{feeitem.tierresult}}  &nbsp;{{feeitem.annual_rate_type}}
+
+
+                        </div>
+
+                  </div>
+
+              </div>
+
+          </div>
+          <a  class="avgrund-close" ng-click="closeclientDetailsPopUp(); ">Close</a>
+
+
+
+
+
     </div>

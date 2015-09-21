@@ -17,8 +17,8 @@
     appSettingProvider.setObj('typeHeadList', ddList);
     appSettingProvider.setObj('svrurl', "http://10.13.65.69/DDservice");
    var dtData = {
-        "AsOfDate": "04-30-2015",//always calculate last month end(t+5 rule apply) Best thing is get from Holdings Database
-        "AsOfDateGet": "2015-04-30"
+        "AsOfDate": "07-31-2015",//always calculate last month end(t+5 rule apply) Best thing is get from Holdings Database
+        "AsOfDateGet": "2015-07-31"
     };
     appSettingProvider.setObj('asofDate', dtData);
  var appcolors = [

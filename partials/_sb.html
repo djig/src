@@ -7,43 +7,35 @@
 
                     <input class='typeahead' type="text" ad-typeahead  options="exampleOptions" datasets="searchDS" ng-model="selectedNumber">
                 </div>
+                <div class="alert alert-danger" ng-show="bSearch">loading Seaching Box....</div>
             </div>
             <div class="col-lg-8">
-               <div ng-show="d3Chart===true&&bAsofDateMVBar==true?true:false"   class="row zoomAsOfDate bar-show-hide">
-                <div  id="d3_0" class="col-lg-3 col-lg-3 mainC2 ">
-                  <d3-Aot id='main2011' options={year:2011,factor:.94,isActive:0} vals=[0,0,0,0,0,0,0,0,0,0,0,110]></d3-Aot>
-                </div>
-                  <div id="d3_1" class="col-lg-3 mainC2 marg">
-                      <d3-Aot id='main2012' options={year:2012,factor:0.95,isActive:0} vals=[119.2,55,119,119,119,119,119,119,100,119,119,130]></d3-Aot>
-                  </div>
-                  <div id="d3_2" class="col-lg-3  mainC2 marg">
-                    <d3-Aot id='main2013' options={year:2013,factor:.96,isActive:0} vals=[4,5,6,4,5,6,7,8,3,2,2,7]></d3-Aot>
-                  </div>
-                  <div id="d3_3" class="col-lg-3  mainC2 marg">
-                    <d3-Aot id='main2014' options={year:2014,factor:.98,isActive:0} vals=[4,5,6,4,5,6,7,8,3,2,2,7]></d3-Aot>
-                  </div>
-                  <div  id="d3_4" class="col-lg-3  mainC2 marg">
-                    <d3-Aot id='main2015' options={year:2015,factor:1,isActive:1,activeMonth:'Jul'} vals=[119,55,119,119,119,119,119,0,0,0,0,0]></d3-Aot>
-                  </div>
-              </div>
+
+
+                          <div ng-show="d3Chart===true&&bAsofDateMVBar==true?true:false"      class="row zoomAsOfDate bar-show-hide ">
+
+                               <div  ng-repeat="item in D3AsofDS"  id={{item.d3Enid}}   class="{{$index === 0 ? 'col-lg-3  mainC1' : 'col-lg-3  mainC1 marg'}} ">
+                                 <d3-Aot id="d3Aot"+{{item.year}}      options={year:item.year,factor:.94,acitiveLabel:item.acitiveLabel} vals=item.vals lables=item.lables></d3-Aot>
+                               </div>
+                          </div>
+
+                          <div ng-show="d3Chart!==true&&bAsofDateMVBar==true?true:false"  id="chtClientMVs" class="ClientMVs bar-show-hide" ra-Bar   dataset="historicalMVs"/>
 
 
 
-                <div ng-show="d3Chart!==true&&bAsofDateMVBar==true?true:false"  id="chtClientMVs" class="ClientMVs bar-show-hide" ra-Bar   dataset="historicalMVs">
-
-                </div>
-                <!-- <div >
-                    <div id="container" class="row show_hide" >
-                        <div id="clientSearchSB" class="clientSearchSummaryBox  sb col-lg-5"></div>
-                        <div id="rmSearchSB" class="clientSearchSummaryBox sb-lg-5"></div>
-                    </div>
-                </div> -->
 
 
-              </div>
-            </div>
           </div>
+        </div>
+      </div>
   <div class="col-lg-1">
        <a href ng-click="d3Chart = !d3Chart" ng-show="bAsofDateMVBar"  class="btn btn-primary btn-sm">{{d3Chart === true ? "R" : "R"}}</a>
     </div>
   </div>
+
+
+    <!-- <div    ng-repeat="item in D3AsofDS">
+      {{item.year}}
+      {{$index}}
+        {{item.vals}}
+    </div> -->

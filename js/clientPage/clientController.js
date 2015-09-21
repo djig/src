@@ -3,6 +3,15 @@
       $templateCache.removeAll();
       $scope.ClientCode = $routeParams.ClientCode;
       $scope.contLen = null;
+      $scope.bData=false;
+      $scope.contacts  = {
+          all: false,
+          primary: true,
+          DFE: false,
+          billing: false,
+          authorized: false
+        };
+
       $('#tabAnimation').css("opacity", "0");
       var allLi = $('#clmvtab li');
       $(allLi).find(".sactive").css("color", "silver");
@@ -14,22 +23,9 @@
       $scope.strategyCols = ["Strategy","MV","",""];
       $scope.assetCols = ["Asset Class", "MV", "", ""];
 
-      $rootScope.$on("something", function (event, data) {
-          console.log("Got It");
-      });
 
 
-
-
-
-
-
-
-
-
-
-
-
+      $scope.asofdate=$routeParams.asofdate;
 
       $scope.tab = 1;
 
@@ -81,6 +77,8 @@
 
       };
 
+
+
       $scope.getTabId = function () {
           var tabId = "";
           if ($scope.tab == 1) tabId = "clientSummaryInner";
@@ -96,15 +94,126 @@
           // var buildPath = "/ClientsDetails/" + $routeParams.ClientCode + "/" + $routeParams.asofdate + "/1212";
           var buildPath = "/Clients/" + $routeParams.ClientCode + "/" + $routeParams.asofdate + "/1212";
           //$location.path(buildPath);
+
+        ///  console.log($scope.tab);
+
+          var filterVals=arguments[1].split("-");
+
+          var filteredAccts=_.filter($scope.accounts,function(obj){
+                var innerFS = _.filter(filterVals, function(filterVal){
+                  if($scope.tab===1){
+                    return filterVal===obj.DistributionEntity.parent_custodian_acct_no
+                    ||filterVal===obj.DistributionEntity.custodian_acct_no
+                    ;
+                    }
+                  else   if($scope.tab===2){
+                    return filterVal===obj.DistributionEntity.product_id;
+                  }
+                  else{
+                    return filterVal===obj.DistributionEntity.marketing_asset_class;
+                  }
+
+                });
+                return  innerFS.length !== 0 ;
+            //return arguments[1].toString().indexOf(obj.DistributionEntity.parent_custodian_acct_no)>-1  ;
+          })
+
+
+        //  console.log(filteredAccts);
+
+
+          $scope.filteredaccounts=filteredAccts.map(function(obj){
+              var retObj=obj;
+              for(var i=0;i<obj.FeeStructure.length;i++){
+                obj.FeeStructure[i].tierstartWithMV= Utility.getMVWithoutHTML(obj.FeeStructure[i].tierstart);
+                obj.FeeStructure[i].tierendWithMV= Utility.getMVWithoutHTML(obj.FeeStructure[i].tierend);
+              }
+          //    retObj.FeeStructure.tierstart= Utility.getMVWithoutHTML(retObj.FeeStructure.tierstart);
+            //  retObj.FeeStructure.tierend= Utility.getMVWithoutHTML(retObj.FeeStructure.tierend);
+              return retObj;
+          }) ;
+
+        //  console.log($scope.filteredaccounts);
           Avgrund.show("#clientDetailsPopUp");
-          popUpBlur.blurContents("clientDetailsPopUp");
+          var svgLine = d3.select("#d3Navline").append("svg")
+             .attr("width", 720)
+             .attr("height", 700);
+          var dr = 2200;
+
+          console.log( $( $(arguments[0].toElement).parent().parent().parent()[0]).height()  );
+          var xintial=angular.element(arguments[0]).prop('clientX')-angular.element(arguments[0]).prop('offsetX');
+          var yinitial = angular.element(arguments[0]).prop('clientY')-angular.element(arguments[0]).prop('offsetY');
+
+          var ln = svgLine.append("line")
+                              .attr("x1", xintial+30 )
+                              .attr("y1", yinitial-20)
+                             .attr("x2", angular.element(arguments[0]).prop('clientX')-200)
+                            .attr("y2",  angular.element(arguments[0]).prop('clientY')-20)
+                            .attr("stroke", 'rgba(0,255,0,.8)')
+                           .attr("stroke-width", 0)
+                           .transition()
+                            .duration(function (d) {
+                              return dr;
+                            })
+                            .attr("x2", angular.element("#clientDetailsPopUp").prop('offsetLeft')-50)
+                           .attr("y2",  angular.element("#clientDetailsPopUp").prop('offsetTop')+50)
+                           .attr("stroke-width", 1)
+                            ;
+              var rowElement= $(arguments[0].toElement).parent().parent().parent()[0];
+              var rectHeight=$(rowElement).height();
+              var rectWidth=$(rowElement).width();
+             var rectangle = svgLine.append("rect")
+                              .attr("x", xintial-220)
+                              .attr("y", yinitial-20)
+                             .attr("width", 0)
+                             .attr("height", 0)
+                             .attr("fill", function (d) {
+                                return "rgba(0,0,0,0)";
+                              })
+                             .attr("stroke-width", 1)
+                             .transition()
+                              .duration(function (d) {
+                                return dr;
+                              })
+                              .attr("width", rectWidth-30)
+                              .attr("height", rectHeight+7)
+                             .attr("stroke", 'rgba(0,255,0,.8 )')
+                            .attr("stroke-width", 1)
+
+                             ;
+
+              //  console.log(xintial);
+                //  console.log( angular.element("#clientDetailsPopUp").prop('offsetLeft')-50);
+            $(".container").animate({
+              'margin-left':"100px"
+            },500);
+
+            $(".avgrund-cover").addClass("moveLeftContent");
+            //
+            console.log($(".container").width()*.8);
+
+            $("#clientDetailsPopUp").width($(".container").width()*.8);
+          //  console.log(angular.element("#clientDetailsPopUp"));
+          //console.log(angular.element(arguments[0]).prop('clientX'));
+          //console.log(angular.element(arguments[0]).prop('clientY'));
+        //   console.log(angular.element($event.target));
+        //  popUpBlur.blurContents("clientDetailsPopUp");
       }
+
+
+
 
       $rootScope.closeclientDetailsPopUp = function () {
           Avgrund.hide();
+          document.getElementById('d3Navline').innerHTML = '';
+
+        $(".container").css({'margin-left':''});
+        //  $(".container").removeClass("moveLeftContent");
         //  $window.history.back();
-           popUpBlur.clearContents();
+           //popUpBlur.clearContents();
       }
+
+
 
       if (typeof $routeParams.entityId !== "undefined") {
           Avgrund.show("#clientDetailsPopUp");
@@ -116,25 +225,23 @@
           var objclMV;
           //Admin Service
 
+
+        var dsClientLevels = RemoteData.post(appSetting.svrurl + "/HoldingsService.svc/POSTAdminClientLevels", {label:$routeParams.ClientCode});
+          dsClientLevels.then(function (data, status, headers, config) {
+             $scope.watch_list_rank=data[0].watch_list_rank;
+             $scope.client_tier_level=data[0].client_tier_level;
+          });
+
+          var dsrSvr = RemoteData.get(appSetting.svrurl + "/HoldingsService.svc/GetDSR/" + $routeParams.ClientCode + "/12-31-2014");
+            dsrSvr.then(
+              function(data,status,headers,config){
+                console.log(data[0]);
+                $scope.DSR=data[0].Fullname;
+              }
+            );
           //adminSVR Promises
           var adminSvr = RemoteData.get(appSetting.svrurl + "/HoldingsService.svc/GetAdminClientDetails/" + $routeParams.ClientCode + "");
-          //adminSvr.success(function (data, status, headers, config) {
-          //                     $scope.clientsAdminData = data;
 
-
-          //                     var activeObjectives = _.filter(data, function (el, i) {
-          //                         return el.ObjectiveStatus == "Active"
-          //                             || (el.ObjectiveStatus == 'Terminated'
-          //                             && Date.parse(Utility.parseJSONDate(el.Objectivestatus_date)) > Date.parse($routeParams.asofdate));
-          //                     });
-
-          //                     $scope.activeObj = activeObjectives;
-          //                     var contracts = _.groupBy(activeObjectives, 'ContractName');
-          //                      objclMV = clMvSummaryFactory.populateMVData('Contracts', contracts);
-          //                     //console.log(objclMV);
-          //                      $scope.ContractSummary = objclMV.getDS();
-          //                      $scope.contLen = $scope.ContractSummary.length;
-          //})
 
           adminSvr.then(
                 function (data, status, headers, config) {
@@ -155,10 +262,13 @@
                         objclMV = clMvSummaryFactory.populateMVData('Contracts', contracts);
                         //console.log(objclMV);
                         $scope.ContractSummary = objclMV.getDS();
+                        //console.log($scope.ContractSummary);
                         $scope.contLen = $scope.ContractSummary.length;
 
                         if ($scope.clientsAdminData.length > 0) {
                             $scope.adminDS = $scope.clientsAdminData[0];
+                            //console.log($scope.adminDS);
+                             $scope.$emit("populateSearchBoxValBasedOn",{val:$scope.adminDS.ClientName});
                         }
                         $rootScope.isLoaded = true;
                         var dataInput = {
@@ -170,7 +280,7 @@
                         var dsMVSvr = RemoteData.post(appSetting.svrurl + "/HoldingsService.svc/GetClientAccts", dataInput);
                         //$http.post(appSetting.svrurl + "/HoldingsService.svc/GetClientAccts", JSON.stringify(dataInput)).
                         dsMVSvr.then(function (data, status, headers, config) {
-
+                            $scope.bData=true;
                             var uniqueStrategyPre = _.filter(data, function (el, i) {
                                 return el.DistributionEntity.acct_vehicle != "Participant"
                                 && el.DistributionEntity.acct_vehicle != "Participant Hedge Funds"
@@ -180,7 +290,20 @@
                             angular.forEach(uniqueStrategyPre, function (element, key) {
                                // console.log(element.DistributionEntity);
                             })
+                            console.log(uniqueStrategyPre);
+                            $scope.accounts=uniqueStrategyPre.map(function(obj){
+                              var retObj=obj;
+                              retObj.DistributionEntity.acct_inception_date=Utility.parseJSONDate(retObj.DistributionEntity.acct_inception_date);
+                              retObj.DistributionEntity.mv=Utility.getMVWithoutHTML(retObj.DistributionEntity.base_mkt_val);
+                              return retObj;
+                            });
+                              var arrMV=_.pluck(_.pluck(uniqueStrategyPre, "DistributionEntity"), "base_mkt_val")
+                                        .map(function(obj){
+                                          return Number(obj) ;
+                                        });
 
+                            $scope.totalMV= Utility.getMVWithoutHTML( _.reduce(arrMV, function(a, b){ return a + b; }, 0));
+                              //  console.log(  $scope.totalMV);
                             var strategy = _.uniq(_.pluck(_.pluck(uniqueStrategyPre, "DistributionEntity"), "product_id"));
                             var assetClass = _.uniq(_.pluck(_.pluck(uniqueStrategyPre, "DistributionEntity"), "marketing_asset_class"));
 
@@ -204,48 +327,6 @@
 
 
 
-                            //angular.forEach($scope.ContractSummary, function (element, key) {
-
-
-
-
-                            //      var filterDS = _.filter(uniqueStrategyPre, function (el, i) {
-                            //          return element['custodiancode']
-                            //              .indexOf(el.DistributionEntity['parent_custodian_acct_no'] == null ?  el.DistributionEntity['custodian_acct_no'] : el.DistributionEntity['parent_custodian_acct_no']) > -1
-                            //        ;
-                            //      });
-
-                            //      var acctVehicles = _.groupBy(_.pluck(filterDS, "DistributionEntity"), 'acct_vehicle');
-
-                            //      var mv2 = _.pluck(acctVehicles['Commingled'], "base_mkt_val")
-                            //          .concat(_.pluck(acctVehicles['Separately Managed'], "base_mkt_val"));
-
-                            //      var totalMv2 = _.reduce(mv2, function (a, b) { return a + b; }, 0);
-                            //      console.log(mv2);
-
-
-                            //      var description = '';
-
-                            //      if (acctVehicles['Commingled']!=null && acctVehicles['Commingled'].length > 0) description += acctVehicles['Commingled'].length + ' Commingled'
-                            //      if (acctVehicles['Commingled'] != null && acctVehicles['Commingled'].length > 0 && acctVehicles['Separately Managed'] != null && acctVehicles['Separately Managed'].length > 0) description += ','
-                            //      if (acctVehicles['Separately Managed'] != null&& acctVehicles['Separately Managed'].length > 0) description += acctVehicles['Separately Managed'].length + ' Separately Managed'
-                            //       element.description = description;
-
-                            //      //var mv=_.pluck(_.pluck(partcipants, "DistributionEntity"), "base_mkt_val")
-                            //      //    .concat(_.pluck(_.pluck(smas, "DistributionEntity"), "base_mkt_val"));
-
-                            //      //var totalMv = _.reduce(mv, function (a, b) { return a + b; }, 0);
-                            //      var x = new UtilService;
-
-                            //      element.mv = x.getMVNW(totalMv2);
-
-                            //      //strategyLen assetClassLen
-                            //      //3 Commingled,9 Separately Managed
-
-                            //  });
-
-
-
 
                         })
 
@@ -258,8 +339,6 @@
           var adminContactsSvr = RemoteData.get(appSetting.svrurl + "/HoldingsService.svc/GetAdminClientContacts/" + $routeParams.ClientCode + "");
           adminContactsSvr.then(function (data, status, headers, config) {
                                $scope.clientsContacts = data;
-                               //console.log($scope.clientsContacts);
-
 
 
           })

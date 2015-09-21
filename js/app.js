@@ -1,12 +1,14 @@
 //some testing
 var ddApp = angular.module('ddApp', ['ngResource', 'ngRoute', 'ui.grid']);
 
-ddApp.controller('helloWorldController', ['$scope', function($scope) {
-  $scope.name = 'Superhero';
-      $scope.counter = 0;
-      $scope.$watch('name', function (newValue, oldValue) {
-          $scope.counter = $scope.counter + 1;
-      });
+ddApp.controller('avgCover', ['$scope', function($scope) {
+
+$scope.closeWindow=function(){
+  document.getElementById('d3Navline').innerHTML = '';
+
+  $(".container").css({'margin-left':''});
+}
+
 }]);
 
 
@@ -18,34 +20,34 @@ String.prototype.startsWith = function (param) {
     return this.indexOf(param)===0 ? true:false;
 };
 
-
-describe("Hello World example", function() {
-    var strTst="hang the dj";
-
-              it("test 1 'hang'", function() {
-                  expect(strTst.startsWith('hang')).toEqual(true);
-                });
-});
-
-
-describe("Hello World example", function() {
-  var scope,
-  controller;
-  beforeEach(function () {
-      module('ddApp');
-  });
-    beforeEach(inject(function ($rootScope, $controller) {
-              scope = $rootScope.$new();
-              controller = $controller('helloWorldController', {
-                  '$scope': scope
-              });
-          }));
-
-      it("test 232 'hang'", function() {
-          expect("hang1".startsWith('hang')).toEqual(true);
-        });
-});
-
+//TESTING
+// describe("Hello World example", function() {
+//     var strTst="hang the dj";
+//
+//               it("test 1 'hang'", function() {
+//                   expect(strTst.startsWith('hang')).toEqual(true);
+//                 });
+// });
+//
+//
+// describe("Hello World example", function() {
+//   var scope,
+//   controller;
+//   beforeEach(function () {
+//       module('ddApp');
+//   });
+//     beforeEach(inject(function ($rootScope, $controller) {
+//               scope = $rootScope.$new();
+//               controller = $controller('helloWorldController', {
+//                   '$scope': scope
+//               });
+//           }));
+//
+//       it("test 232 'hang'", function() {
+//           expect("hang1".startsWith('hang')).toEqual(true);
+//         });
+// });
+//
 
 
 

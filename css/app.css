@@ -27,18 +27,18 @@
  }
  .svgWraper{
    -webkit-transform: rotateX(-50deg) skew(15deg,10deg);
-   box-shadow: -2px 2px 2px rgba( 0, 0, 0, 0.6 );
- border-radius: 100px;
- border-width: 0px;
- border-style: solid;
- border-color: rgba(0, 0, 0, 0.08);
- background-color: rgba(255, 255, 255, 0.51);
+   box-shadow: -1px 2px 2px rgba( 0, 0, 0, 0.6 );
+   border-radius: 100px;
+   border-width: 0px;
+   border-style: solid;
+   border-color: rgba(0, 0, 0, 0.08);
+   background-color: rgba(0, 0, 0, 0.005);
  }
  .marg{
-     margin-left: -180px;
+     margin-left: -140px;
  }
  .margA{
-     margin-left: -100px;
+     margin-left: -80px;
 
      -webkit-transition: all 1s ease;
      -moz-transition: all 1s ease;
@@ -55,3 +55,51 @@
    -o-transition: all 1s ease;
    transition: all 1s ease;
  }
+
+
+/* Bootstrap UI overwrite*/
+
+.btn-primary {
+  color: grey !important;
+   background-color:rgba(0, 255, 0, 0.31)!important;
+  border-color: rgba(255, 255, 255, 0) !important;
+      border-radius: 50%;
+}
+
+
+/*Pop Up Window Animation Related*/
+.moveLeftContent{
+  margin-left: -50px;
+
+}
+.moveLeftContentAnim
+ {
+   -webkit-animation-name: moveLeftContent; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+    animation-name: moveLeftContent;
+    animation-duration: 1s;
+}
+
+
+
+@-moz-keyframes moveLeftContent {
+
+  100% { margin-left:-100px
+   }
+
+
+}
+@-webkit-keyframes moveLeftContent {
+
+ 100% {  margin-left:-100px
+  }
+
+
+}
+@keyframes moveLeftContent {
+
+ 100% {  margin-left:-100px
+  }
+
+
+}

@@ -19,7 +19,7 @@
 .tt-hint {
   width: 326px;
   height: 25px;
- 
+
   font-size: 12px;
   line-height: 25px;
   border: 2px solid #ccc;
@@ -48,13 +48,13 @@
 }
 
 .tt-dropdown-menu {
-  
+
 width: 352px;
 text-align: left;
 margin-top: 1px;
- 
+
 background-color: rgba(245,245,245,.92);
- 
+
 border: 1px solid rgba(0, 0, 0, 0.2);
 -webkit-border-radius: 8px;
 -moz-border-radius: 8px;
