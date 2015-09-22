@@ -5075,28 +5075,7 @@ letter-spacing: 1px;
 }
 
 
-/* ------------------------------------------------- */
 
-#content
-{
-    background: #fff;
-    /*padding: 2em;*/
-
-	position: relative;
-	z-index: 2;
-
-
-
-
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 5px;
-    /*-webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);*/
-    height: 110px
-
-}
 
 
 

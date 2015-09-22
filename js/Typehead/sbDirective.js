@@ -217,18 +217,7 @@
 
 
                                         var cmv = _.pluck(data, "ClientMV");
-                                        // var cmvlables = _.pluck(data, "eff_date").map(function (asofdate,i) {
-                                        //     if ( asofdate.indexOf('12/31') > -1)
-                                        //     {
-                                        //         var mv = Utility.getMVWithoutHTML(cmv[i]);
-                                        //
-                                        //         return  mv + '\n' +  asofdate ;
-                                        //     }
-                                        //     else
-                                        //         {
-                                        //         return asofdate   ;
-                                        //     }
-                                        // });
+
                                         var cmvlables = _.pluck(data, "eff_date").map(function (asofdate,i) {
                                           var dt=new Date(asofdate);
                                           ///console.log(dt.getMonth());

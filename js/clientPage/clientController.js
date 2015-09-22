@@ -4,14 +4,6 @@
       $scope.ClientCode = $routeParams.ClientCode;
       $scope.contLen = null;
       $scope.bData=false;
-      $scope.contacts  = {
-          all: false,
-          primary: true,
-          DFE: false,
-          billing: false,
-          authorized: false
-        };
-
       $('#tabAnimation').css("opacity", "0");
       var allLi = $('#clmvtab li');
       $(allLi).find(".sactive").css("color", "silver");
@@ -189,19 +181,14 @@
             },500);
 
             $(".avgrund-cover").addClass("moveLeftContent");
-            //
-            console.log($(".container").width()*.8);
 
-            $("#clientDetailsPopUp").width($(".container").width()*.8);
+            $("#clientDetailsPopUp").width(950);
           //  console.log(angular.element("#clientDetailsPopUp"));
           //console.log(angular.element(arguments[0]).prop('clientX'));
           //console.log(angular.element(arguments[0]).prop('clientY'));
         //   console.log(angular.element($event.target));
         //  popUpBlur.blurContents("clientDetailsPopUp");
       }
-
-
-
 
       $rootScope.closeclientDetailsPopUp = function () {
           Avgrund.hide();
@@ -213,7 +200,7 @@
            //popUpBlur.clearContents();
       }
 
-
+     
 
       if (typeof $routeParams.entityId !== "undefined") {
           Avgrund.show("#clientDetailsPopUp");

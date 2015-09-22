@@ -11,7 +11,12 @@ $scope.closeWindow=function(){
 
 }]);
 
-
+String.prototype.handleNullUndefinedContacts = function(val){
+  if(typeof value === "undefined" || val === null || val===''){
+    return 'N';
+  }
+  return val;
+}
 String.prototype.startsWith = function (param) {
     //this check will take care of non String Data Type as input parama..
     if (typeof param !== 'string') {

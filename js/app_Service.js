@@ -16,7 +16,7 @@ function UtilService() {
         });
     }
 
-
+    
     this.RowsAnimationWithDuration = function (count, divrows, Duration, maxcnt) {
         count = 0;
         var divROws = $(divrows);
