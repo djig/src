@@ -27,7 +27,7 @@ ddApp.directive('clientAdmin', function () {
                       };
                       $scope.bindSingleSwitch= function(key){
                         return function(key){
-                          console.log(key);
+                        //  console.log(key);
                             $scope.$watch('contacts.' + key, function (newVal) {
                                   $scope.contacts[key]=newVal;
                                    $scope.filterContactData();
@@ -69,7 +69,7 @@ ddApp.directive('clientAdmin', function () {
 
                         });
                         $scope.clientDataSummary=function(){
-                          console.log($scope.ClientContactsUnfilterdData);
+                          //console.log($scope.ClientContactsUnfilterdData);
 
                           $scope.allCnt=$scope.ClientContactsUnfilterdData.length;
                           $scope.primaryCnt= _.where($scope.ClientContactsUnfilterdData , {primary_contact:'Y'}).length;
@@ -81,13 +81,15 @@ ddApp.directive('clientAdmin', function () {
                         $scope.filterContactData = function(){
                             //var cData=$scope.ClientContacts;
                             var objWhere={};
-
-                              if($scope.contacts.billing === "Y" ){
+                            console.log($scope.contacts);
+                              if($scope.contacts.billing ){
                                 objWhere['billing_contact'] ="Y" ;
                               }
-                              if($scope.contacts.signator==="Y"){  objWhere.signator = "Y"}
-                              if($scope.contacts.primary_contact==="Y"){ objWhere.primary_contact = "Y"}
-                              if($scope.contacts.dfe_report==="Y"){ objWhere.dfe_report ="Y"}
+                              if($scope.contacts.authorized){  objWhere.signator = "Y"}
+                              if($scope.contacts.primary){
+                                console.log("t");
+                                 objWhere.primary_contact = "Y"}
+                              if($scope.contacts.dfe){ objWhere.dfe_report ="Y"}
 
 
                             if($scope.all){
@@ -98,7 +100,7 @@ ddApp.directive('clientAdmin', function () {
                                primary_contact:  "Y",
                              }
                             }
-                          //  console.log($scope.ClientContactsUnfilterdData);
+                            console.log(objWhere);
 
 
                             $scope.ClientContacts =_.where($scope.ClientContactsUnfilterdData , objWhere);
@@ -108,7 +110,7 @@ ddApp.directive('clientAdmin', function () {
                             //     && obj.dfe_report  === objWhere.dfe_report
                             //     //  && obj.billing_contact  === objWhere.billing_contact
                             // });
-                              console.log($scope.ClientContacts);
+                            console.log($scope.ClientContacts);
                             $scope.clientContactTabs=_.uniq(_.pluck($scope.ClientContacts,"business_function"));
                             $scope.ClientContactsGrp = _.groupBy($scope.ClientContacts,"business_function");
 
