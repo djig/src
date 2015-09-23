@@ -7,19 +7,19 @@
       <div class="BoxesInnerContactsAdminData">
           <div   class="row">
             <div     class="col-lg-2">
-           <input type="checkbox" ng-model="contacts.all" class="js-switch" ui-switch /><span class="contactButtonText">{{allCnt}} ALL </span>
+           <input type="checkbox"   ng-model="contacts.all" class="js-switch chkAll" ui-switch /><span class="contactButtonText">{{allCnt}} ALL </span>
             </div>
             <div     class="col-lg-2">
-              <input type="checkbox" ng-model="contacts.primary" class="js-switch" ui-switch /><span class="contactButtonText"> {{primaryCnt}} Primary </span>
+              <input id="chkPrimary" type="checkbox" ng-model="contacts.primary" class="js-switch chkNonAll" ui-switch /><span class="contactButtonText"> {{primaryCnt}} Primary </span>
             </div>
             <div     class="col-lg-2">
-              <input type="checkbox" ng-model="contacts.DFE" class="js-switch" ui-switch /><span class="contactButtonText">{{contacts.dfeCnt}} DFE </span>
+              <input type="checkbox" ng-model="contacts.DFE" class="js-switch chkNonAll" ui-switch /><span class="contactButtonText">{{contacts.dfeCnt}} DFE </span>
               </div>
           <div     class="col-lg-2">
-           <input type="checkbox" ng-model="contacts.billing" class="js-switch" ui-switch /><span class="contactButtonText">{{billingCnt}} Billing </span>
+           <input type="checkbox" ng-model="contacts.billing" class="js-switch chkNonAll" ui-switch /><span class="contactButtonText">{{billingCnt}} Billing </span>
            </div>
              <div     class="col-lg-3">
-           <input type="checkbox" ng-model="contacts.authorized" class="js-switch" ui-switch /><span class="contactButtonText">{{authorizedCnt}} Authorized Signer </span>
+           <input type="checkbox" ng-model="contacts.authorized" class="js-switch chkNonAll" ui-switch /><span class="contactButtonText">{{authorizedCnt}} Authorized Signer </span>
            </div>
          </div>
          <!-- <ul   class="nav nav-tabs">

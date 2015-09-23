@@ -4,7 +4,7 @@ return {
           restrict: 'AE',
           scope : {initValue : '=ngModel'},
           link: function(scope, elem, attrs, ngModel) {
-                console.log("test Directive");
+            //    console.log(elem);
                 if(!ngModel) return false;
                 var options = {};
                 try {
@@ -15,6 +15,7 @@ return {
                 var previousDisabledValue;
                 // Watch for attribute changes to recreate the switch if the 'disabled' attribute changes
                 attrs.$observe('disabled', function(value) {
+                  //  console.log("test Directive");
                   if (value == undefined || value == previousDisabledValue) {
                     return;
                   } else {
@@ -22,6 +23,8 @@ return {
                   }
                   initializeSwitch();
                 });
+
+
 
                 function initializeSwitch() {
                   $timeout(function() {
@@ -34,10 +37,13 @@ return {
                     var element = switcher.element;
                     element.checked = scope.initValue;
                     switcher.setPosition(false);
+              //      console.log(element);
+
+
                     element.addEventListener('change',function(evt) {
-                       
-                        scope.$apply(function() {
-                            ngModel.$setViewValue(element.checked);
+                //        console.log(element);
+                      scope.$apply(function() {
+                          ngModel.$setViewValue(element.checked);
                         })
                     })
                   }, 0);

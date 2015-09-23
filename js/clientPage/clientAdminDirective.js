@@ -2,8 +2,8 @@ ddApp.directive('clientAdmin', function () {
     return {
         restrict: 'E',
         templateUrl: "partials/_cPageAdmin.html",
-         controller: ['$scope', '$location', '$routeParams',  'Utility', 'typeheadDSFactory', 'ApplicationLog', 'appSetting', '$http', 'RemoteData',
-                  function ($scope, $location,$routeParams,  Utility, typeheadDSFactory, ApplicationLog, appSetting, $http, RemoteData) {
+         controller: ['$scope', '$location', '$routeParams',  'Utility', 'typeheadDSFactory', 'ApplicationLog', 'appSetting', '$http', 'RemoteData','$timeout',
+                  function ($scope, $location,$routeParams,  Utility, typeheadDSFactory, ApplicationLog, appSetting, $http, RemoteData,$timeout) {
 
                     $scope.ClientCode = $routeParams.ClientCode;
                     $scope.asofdate=$routeParams.asofdate;
@@ -25,12 +25,29 @@ ddApp.directive('clientAdmin', function () {
                         billing: false,
                         authorized: false
                       };
+
+                      // $timeout(function() {
+                      //   console.log("Jd");
+                      //  $scope.$apply(function() {
+                      //    $scope.contacts  = {
+                      //       all: true,
+                      //       primary: false,
+                      //       DFE: false,
+                      //       billing: false,
+                      //       authorized: false
+                      //     };
+                      //   });
+                      // }, 10000);
+
+
                       $scope.bindSingleSwitch= function(key){
                         return function(key){
                         //  console.log(key);
                             $scope.$watch('contacts.' + key, function (newVal) {
+                                console.log("Watch" + key);
                                   $scope.contacts[key]=newVal;
-                                   $scope.filterContactData();
+
+                                   $scope.filterContactData(key,newVal);
                             });
                           }(key);
                       }
@@ -63,8 +80,9 @@ ddApp.directive('clientAdmin', function () {
 
                           $scope.ClientContactsUnfilterdData =data;
                           $scope.clientDataSummary();
-                          $scope.filterContactData();
-                            $scope.bindUISwithch();
+
+                           $scope.bindUISwithch();
+                           $scope.filterContactData("primary",true);
                                          //console.log($scope.selectedContacts);
 
                         });
@@ -78,47 +96,91 @@ ddApp.directive('clientAdmin', function () {
                           $scope.authorizedCnt= _.where($scope.ClientContactsUnfilterdData , {signator:'Y'}).length;
                         }
 
-                        $scope.filterContactData = function(){
+                        $scope.filterContactData = function(key,newVal){
                             //var cData=$scope.ClientContacts;
                             var objWhere={};
-                            console.log($scope.contacts);
-                              if($scope.contacts.billing ){
-                                objWhere['billing_contact'] ="Y" ;
-                              }
-                              if($scope.contacts.authorized){  objWhere.signator = "Y"}
-                              if($scope.contacts.primary){
-                                console.log("t");
-                                 objWhere.primary_contact = "Y"}
-                              if($scope.contacts.dfe){ objWhere.dfe_report ="Y"}
-
-
-                            if($scope.all){
-                              objWhere={
-                                billing_contact: "Y" ,
-                               dfe_report : "Y",
-                               signator:  "Y",
-                               primary_contact:  "Y",
-                             }
-                            }
-                            console.log(objWhere);
-
-
-                            $scope.ClientContacts =_.where($scope.ClientContactsUnfilterdData , objWhere);
-                            // $scope.ClientContacts =_.filter($scope.ClientContactsUnfilterdData , function(obj){
-                            //   return obj.primary_contact.toString() ===objWhere.primary_contact
-                            //    && obj.signator  === objWhere.signator
-                            //     && obj.dfe_report  === objWhere.dfe_report
-                            //     //  && obj.billing_contact  === objWhere.billing_contact
-                            // });
-                            console.log($scope.ClientContacts);
-                            $scope.clientContactTabs=_.uniq(_.pluck($scope.ClientContacts,"business_function"));
-                            $scope.ClientContactsGrp = _.groupBy($scope.ClientContacts,"business_function");
-
-                            $scope.selectedContactCompanyName= _.findWhere($scope.ClientContacts , {business_function: $scope.clientContactTabs[0]}).person_company_name;
 
 
 
-                            $scope.selectedContacts =  _.where($scope.ClientContacts,{person_company_name:$scope.selectedContactCompanyName});
+                                       if(key==="all" && newVal===true){
+                                         console.log("All");
+                                              // angular.element('#chkPrimary')[0].checked=false;
+                                              // angular.element( '#chkPrimary+.switchery' ).removeAttr( 'style' );
+                                              // $( '#chkPrimary+.switchery' ).addClass("switheryChangeOff");
+                                              // $( '#chkPrimary' ).removeClass("ng-pristine");
+                                              // $( '#chkPrimary' ).addClass("ng-valid-parse");
+                                              // $( '#chkPrimary' ).addClass("ng-dirty");
+                                              // angular.element( '#chkPrimary+.switchery small' ).removeAttr('style');
+                                              // $( '#chkPrimary+.switchery small' ).addClass("smallOff");
+
+                                            //  angular.element('#chkPrimary')[0].checked=false;
+                                              angular.element( '.chkNonAll+.switchery' ).removeAttr( 'style' );
+                                              $( '.chkNonAll+.switchery' ).addClass("switheryChangeOff");
+                                              $( '.chkNonAll' ).removeClass("ng-pristine");
+                                              $( '.chkNonAll' ).addClass("ng-valid-parse");
+                                              $( '.chkNonAll' ).addClass("ng-dirty");
+                                              angular.element( '.chkNonAll+.switchery small' ).removeAttr('style');
+                                              $( '.chkNonAll+.switchery small' ).addClass("smallOff");
+
+                                              $scope.contacts.primary= false;
+                                              $scope.contacts.DFE= false;
+                                              $scope.contacts.billing= false;
+                                              $scope.contacts.authorized= false;
+
+                                           }
+
+                                         if(key!=="all"  && newVal===true ){
+                                           $scope.contacts.all= false;
+
+                                           angular.element( '.chkAll+.switchery' ).removeAttr( 'style' );
+                                           $( '.chkAll+.switchery' ).addClass("switheryChangeOff");
+                                           $( '.chknAll' ).removeClass("ng-pristine");
+                                           $( '.chkAll' ).addClass("ng-valid-parse");
+                                           $( '.chkAll' ).addClass("ng-dirty");
+                                           angular.element( '.chkAll+.switchery small' ).removeAttr('style');
+                                           $( '.chkAll+.switchery small' ).addClass("smallOff");
+
+
+                                         }
+
+                                         if($scope.contacts.all){
+                                              objWhere={} ;
+                                         }
+                                         if($scope.contacts.authorized){  objWhere.signator = "Y"}
+                                         if($scope.contacts.primary){
+
+                                            objWhere.primary_contact = "Y"}
+                                         if($scope.contacts.DFE){ objWhere.dfe_report ="Y"}
+                                          if($scope.contacts.billing){ objWhere.billing_contact ="Y"}
+                                         //console.log(objWhere);
+                                         console.log($scope.ClientContactsUnfilterdData);
+
+                                         $scope.ClientContacts =_.where($scope.ClientContactsUnfilterdData , objWhere);
+                                         $scope.clientContactTabs=_.uniq(_.pluck($scope.ClientContacts,"business_function"));
+                                         $scope.ClientContactsGrp = _.groupBy($scope.ClientContacts,"business_function");
+                                         if($scope.ClientContacts.length>0){
+                                           $scope.selectedContactCompanyName= _.findWhere($scope.ClientContacts , {business_function: $scope.clientContactTabs[0]}).person_company_name;
+                                           $scope.selectedContacts =  _.where($scope.ClientContacts,{person_company_name:$scope.selectedContactCompanyName});
+                                         }
+                                         else {
+                                           $scope.selectedContactCompanyName= "";
+                                           $scope.selectedContacts = [];
+                                         }
+
+
+
+
+                                    // },10);
+
+
+
+
+
+
+
+
+
+
 
 
 
