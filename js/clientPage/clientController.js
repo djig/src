@@ -11,7 +11,7 @@
       $(liSelected).find(".sactive").css("color", "black");
       $(liSelected).css("background-color", "rgba(236, 255, 241, 0.9)");
       //rgba(236, 255, 241, 0.9)
-
+      console.log($location);
       $scope.strategyCols = ["Strategy","MV","",""];
       $scope.assetCols = ["Asset Class", "MV", "", ""];
 
@@ -323,12 +323,12 @@
             });
 
 
-          var adminContactsSvr = RemoteData.get(appSetting.svrurl + "/HoldingsService.svc/GetAdminClientContacts/" + $routeParams.ClientCode + "");
-          adminContactsSvr.then(function (data, status, headers, config) {
-                               $scope.clientsContacts = data;
+          // var adminContactsSvr = RemoteData.get(appSetting.svrurl + "/HoldingsService.svc/GetAdminClientContacts/" + $routeParams.ClientCode + "");
+          // adminContactsSvr.then(function (data, status, headers, config) {
+          //                      $scope.clientsContacts = data;
 
 
-          })
+          // })
 
 
 

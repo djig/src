@@ -1,10 +1,10 @@
 <div id="clientSummaryMVTitle" class="clientSummaryMVTitleNew">
-  Contacts
+  {{vTabDescArr[vTab-1]}}
 </div>
 <div ng-class="openRSMenu" class="row">
   <div     class="col-lg-12">
      <div class='rightSide-content' >
-      <div class="BoxesInnerContactsAdminData">
+      <div ng-show="isSetVeritical(1)" class="BoxesInnerContactsAdminData">
           <div   class="row">
             <div     class="col-lg-2">
            <input type="checkbox"   ng-model="contacts.all" class="js-switch chkAll" ui-switch /><span class="contactButtonText">{{allCnt}} ALL </span>
@@ -37,54 +37,89 @@
          <div class="contactData">
            <br>
            <span class="ContactcomapnyHeader">{{selectedContactCompanyName}}</span>
-           <div class="row">
-             <div  ng-repeat="item in selectedContacts" class="contactLable col-lg-4">
+           <div class="row contactList">
+             <div   ng-repeat="item in selectedContacts" class="contactLable col-lg-4">
+                <a href ng-click="openContact($event,item)">
                 {{$index + 1}}. {{ item.first_name +' '+ item.last_name }}
+                </a>
              </div>
+             </div>
+          
+            <div   ng-show="contactPopUp"  class="dvContact"> <div class="row-fluid ContactNameBottomBorder"><span class="ContactName">
+              {{selectedContact.person_name}}
+            </span>&nbsp;&nbsp;{{selectedContact.entity_name}}  </div> 
+            <div class="row">
+                <div class="col-lg-4 ContactCardRight"> 
+                    <table border="0"><tbody><tr class="AcctDetailsROw"><td>Authorized Signer</td><td>{{selectedContact.signator}}</td></tr>
+                    <tr class="AcctDetailsAlternateROw"><td> Primary</td><td>{{selectedContact.primary_contact}}</td></tr>
+                    <tr class="AcctDetailsROw"><td> DFE</td><td>{{selectedContact.dfe_report}}</td></tr>
+                    <tr class="AcctDetailsAlternateROw"><td> Billing</td><td>{{selectedContact.billing_contact}}</td></tr>
+                    <tr class="AcctDetailsROw"><td> ICC</td><td> </td></tr></tbody>
+                    </table>
+                </div>
+                <div class="col-lg-8">
+                    <table border="0" cellspacing="5"> <tbody><tr><td colspan="3"> 
+                    {{selectedContact.PHONES}}  </td> </tr><tr><td colspan="3"><a href="mailto:Rick.Bratthauer@schwab.com"> {{selectedContact.e_mail_address}} </a> </td></tr><tr><td colspan="3">{{selectedContact.mail_address}}</td></tr><tr><td>{{selectedContact.mail_city}}</td><td td="">{{selectedContact.mail_state}} - {{selectedContact.mail_zip}}</td> <td>{{selectedContact.mail_country}}</td></tr></tbody></table> 
+                     <span class="contacts"><a href ng-click="closeContact()" >Close</a></span>
+                </div>
+
+              </div>
+            </div>
+
            </div>
-           <!-- <ul class="nav nav-tabs">
-             <li  ng-repeat="item in clientContactTabs">
-                <a href="#" name="tab0"><span class="counter">  {{item}}</a>
-             </li>
-
-           </ul> -->
-
-           <!-- <div id="tab0" style="display: block;"><span class="ContactcomapnyHeader">Charles Schwab Trust Company</span><br><span class="contactLable">215 Fremont St. SF215FMT-05-631,San Francisco,CA-94104 United States</span><br><br>
-             <table border="0" cellpadding="10" cellspacing="10"><tbody><tr class="ContactSummaryROw"><td class="tdContact contactLable " id="17725">  <span id="17725" class="contactLable">1.&nbsp;Aziz&nbsp;Khan</span><span class="tabbspace"></span></td><td class="tdContact contactLable " id="17721">  <span id="17721" class="contactLable">2.&nbsp;Free&nbsp;Foutz</span><span class="tabbspace"></span></td><td class="tdContact contactLable " id="17722">  <span id="17722" class="contactLable">3.&nbsp;Jake&nbsp;Gilliam</span><span class="tabbspace"></span></td><td class="tdContact contactLable " id="17723">  <span id="17723" class="contactLable">4.&nbsp;John&nbsp;Sturiale</span><span class="tabbspace"></span></td></tr><tr class="ContactSummaryROw"><td class="tdContact contactLable " id="18423">  <span id="18423" class="contactLable">5.&nbsp;Matthew&nbsp;Flood</span><span class="tabbspace"></span></td><td class="tdContact contactLable " id="18021">  <span id="18021" class="contactLable">6.&nbsp;Rick&nbsp;Bratthauer</span><span class="tabbspace"></span></td><td class="tdContact contactLable " id="17724">  <span id="17724" class="contactLable">7.&nbsp;Tony&nbsp;Creasy</span><span class="tabbspace"></span></td></tr></tbody></table> </div></div> -->
-
-
+       </div>
+        <div class="BoxesInnerContactsAdminData" ng-show="isSetVeritical(2)">
+          AuthFund Page
       </div>
-       <div>
-
+      <div class="BoxesInnerContactsAdminData" ng-show="isSetVeritical(3)">
+        <div class="row">
+            <div class="col-lg-11">
+             <hc-col  
+             options={height:201,width:500,colorsPallete:["rgba(0,255,0,.5)","rgba(255,0,0,.5)"]} 
+             dataset="cashflows"  
+             series="scols"  
+             totals="cashflowTotals"  >
+                    </hc-col>
+                
+            </div>
+            <div class="col-lg-1">
+              
+            </div>
+        </div>
+         
+      </div>
     <div ng-click="openRSMenu===''?openRSMenu='rightSide-open rightSide-content':openRSMenu=''"  class='rightSide-menu'>
           <div class='rightSide-icon' >
-            <img   src="images/add2_257.png" width="15px" height="12px">
+            <img title="click here to open additional features"  src="images/add2_257.png" width="15px" height="12px">
 
 
           </div>
         <nav>
 
           <ul  class="nav nav-pills clientsTabs">
-                <li ng-class="{active:isSetVeritical(1)}" class="active" style="background-color: rgba(236, 255, 241, 0.901961);">
-                    <a href="" ng-click="setTabVeritical(1)">
+                <li ng-class="{active:isSetVeritical(1)}"   >
+                    <a href  ng-click="setTabVeritical(1)">
                         <span class="sactive" style="color: black;">Contacts</span>
-                        <div class="bgTabNumActive ng-binding">5</div>
+                        <div class="bgTabNumActive ng-binding">{{contactCnt}}</div>
                     </a>
                 </li>
                 <li ng-class="{ active:isSetVeritical(2) }">
-                    <a href="" ng-click="setTabVeritical(2)">
-                        <span class="sactive" style="color: silver;">Autorized Funds</span>
-                        <div class="bgTabNum ng-binding">12</div>
+                    <a href  ng-click="setTabVeritical(2)">
+                        <span class="sactive" style="color: silver;">Auth Funds</span>
+                        <div class="bgTabNum ng-binding"> </div>
                     </a>
                 </li>
                 <li ng-class="{ active:isSetVeritical(3) }">
-                    <a href="" ng-click="setTabVeritical(3)">
+                    <a href  ng-click="setTabVeritical(3)">
                         <span class="sactive" style="color: silver;">Cash Flow</span>
-                        <div class="bgTabNum ng-binding">7</div>
+                        <div class="bgTabNum ng-binding"> </div>
                     </a>
 
                 </li>
-
+                <br>
+                <a class="closeRS" href  ng-click="openRSMenu!==''?openRSMenu='rightSide-open rightSide-content':openRSMenu=''">
+                close
+                </a>
         </nav>
 
 

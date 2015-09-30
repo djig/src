@@ -1,5 +1,5 @@
 //some testing
-var ddApp = angular.module('ddApp', ['ngResource', 'ngRoute', 'ui.grid']);
+var ddApp = angular.module('ddApp', [ 'ngRoute']);
 
 ddApp.controller('avgCover', ['$scope', function($scope) {
 
@@ -11,29 +11,14 @@ $scope.closeWindow=function(){
 
 }]);
 
-String.prototype.handleNullUndefinedContacts = function(val){
-  if(typeof value === "undefined" || val === null || val===''){
-    return 'N';
-  }
-  return val;
-}
-String.prototype.startsWith = function (param) {
-    //this check will take care of non String Data Type as input parama..
-    if (typeof param !== 'string') {
-            return false;
-       }
-    return this.indexOf(param)===0 ? true:false;
-};
-
-//TESTING
-// describe("Hello World example", function() {
-//     var strTst="hang the dj";
-//
-//               it("test 1 'hang'", function() {
-//                   expect(strTst.startsWith('hang')).toEqual(true);
-//                 });
-// });
-//
+var SimpleController = function ($scope) {
+  $scope.isTriggered=true;
+  $scope.trigger = function() {
+          $scope.isTriggered = false;
+      };
+   };
+   ddApp.controller("SimpleController",
+                ["$scope", SimpleController]);
 //
 // describe("Hello World example", function() {
 //   var scope,
