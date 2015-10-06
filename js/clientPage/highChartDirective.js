@@ -1,6 +1,6 @@
 ddApp.directive('hcCol', function() {
   return {
-  		require: ['^clientAdmin'],
+  	 
       restrict: 'EA',
       scope: { 
       	dataset: '=',
