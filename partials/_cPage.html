@@ -1,12 +1,12 @@
 ﻿<div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-md-12">
       <div class="alert alert-danger" ng-show="!bData">loading client Data....</div>
 
   <div id="clientSummaryHeader" class="ClientSummaryHeader   row">
-            <div  class="ContactcomapnyHeader col-lg-3">
+            <div  class="ContactcomapnyHeader col-lg-3 col-md-4">
                 {{adminDS.ClientName}}
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-md-2">
                 <div id="clientSummaryR2C1" class="ColHeader">
                     RM:<span class="ColVal">{{adminDS.RM}}</span>
                 </div>
@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-1">
+            <div class="col-lg-1 col-md-2">
                 <div class="ColHeader">
                 DSR
                 </div>
@@ -23,7 +23,7 @@
                     {{DSR!==undefined?DSR:'Loading..'}}
                 </div>
             </div>
-            <div class="col-lg-1">
+            <div class="col-lg-1 col-md-2">
                 <div class="ColHeader">
                 AsOfDate
                 </div>
@@ -33,7 +33,7 @@
             </div>
 
 
-            <div class="col-lg-1">
+            <div class="col-lg-1 col-md-2">
                 <div id="tAssets" class="ColHeader">
                     Assets
                 </div>
@@ -41,14 +41,14 @@
                   {{totalMV!==undefined?totalMV:'Loading..'}}
                 </div>
             </div>
-            <div class="col-lg-1">
+            <div class="col-lg-1 col-md-2">
                 <div   class="ColHeader">
                 </div>
                 <div  class="ColVal">
                 </div>
             </div>
 
-            <div class="col-lg-1">
+            <div class="col-lg-1 col-md-2">
                 <div   class="ColHeader">
                   Watch List
                 </div>
@@ -56,7 +56,7 @@
                     {{watch_list_rank!==undefined?watch_list_rank:'Loading..'}}
                 </div>
             </div>
-            <div class="col-lg-1">
+            <div class="col-lg-1 col-md-2">
                 <div   class="ColHeader">
                   Client Tier Level
                 </div>
@@ -74,7 +74,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-12">
         <div id="clientSummaryMVTitle" class="clientSummaryMVTitleNew">
             Market Value
         </div>
@@ -109,7 +109,7 @@
 
 
                     <div class="row ContractSummaryROwSearchResultHeader">
-                        <div class="col-lg-5 ContractName">
+                        <div class="col-lg-5  ContractName">
                             Contract Name&nbsp;
                         </div>
 
@@ -167,7 +167,7 @@
         </section>
 
  </div>
-<div class="col-lg-6">
+<div class="col-lg-6 col-md-12">
 
         <client-Admin></client-Admin>
 
@@ -188,23 +188,23 @@
 
 
               <div class="row ContractSummaryROwSearchResultHeader">
-                  <div class="col-lg-2 custodian_acct_no">
+                  <div class="col-lg-2 col-md-12 custodian_acct_no">
 
                   </div>
 
-                  <div class="col-lg-3 entity_long_name">
+                  <div class="col-lg-3 col-md-3 entity_long_name">
 
                   </div>
-                  <div class="col-lg-1 acct_vehicle">
+                  <div class="col-lg-1 col-md-1 acct_vehicle">
 
                   </div>
-                  <div class="col-lg-1 acct_inception_date">
+                  <div class="col-lg-1 col-md-1 acct_inception_date">
                       &nbsp;Inception Date
                   </div>
-                  <div class="col-lg-1 base_mkt_val">
+                  <div class="col-lg-1 col-md-1 base_mkt_val">
                       &nbsp;Market Value
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-lg-4 col-md-4">
                       &nbsp;Fee Structure
                   </div>
 
@@ -216,7 +216,7 @@
                         {{item.DistributionEntity.acct_vehicle !=="Separately Managed"?"-":""}}
                         {{item.DistributionEntity.custodian_acct_no }}
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-md-4">
                     {{item.DistributionEntity.entity_name }}-
                       {{item.DistributionEntity.entity_long_name }}
                       <br>
@@ -224,20 +224,20 @@
                       <br>
                       Benchmark : {{item.DistributionEntity.Banchmark }}
                   </div>
-                  <div class="col-lg-1">
+                  <div class="col-lg-1 col-md-1">
                       {{item.DistributionEntity.acct_vehicle }}
                   </div>
 
 
-                  <div class="col-lg-1">
+                  <div class="col-lg-1 col-md-1">
                        {{item.DistributionEntity.acct_inception_date }}
                   </div>
-                  <div class="col-lg-1 ">
+                  <div class="col-lg-1 col-md-1">
                        {{item.DistributionEntity.mv }}
                   </div>
-                  <div class="col-lg-4 ">
+                  <div class="col-lg-4 col-md-4">
                           <div ng-repeat="feeitem in item.FeeStructure   " class="row feeStructureRow">
-                            <div class="col-lg-11">
+                            <div class="col-lg-11 col-md-11">
                                 {{ feeitem.tierendWithMV}} - {{feeitem.tierend!==null? feeitem.tierendWithMV :'$∞'}}
                                 &nbsp;&nbsp;
                                 {{feeitem.tierresult}}  &nbsp;{{feeitem.annual_rate_type}}
