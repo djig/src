@@ -68,9 +68,71 @@
   //    }));
 });
 
+describe("ddApp", function() {
+     var $route, $rootScope, $location, $httpBackend;
 
+    beforeEach(function () {
+        module('ddApp');
+        inject(function($injector){
+            $route = $injector.get('$route');
+            $rootScope = $injector.get('$rootScope');
+            $location = $injector.get('$location');
+            $httpBackend = $injector.get('$httpBackend');
+            
+            $httpBackend.when('GET', 'partials/_cPage.html').respond('Clients');
+            
+            //console.log($location);
+          });
 
+    });
+     it('RM route Testing', function(){
+    // navigate using $apply to safely run the $digest cycle
+          $location.path("/Clients/DavidDirks/06-30-2015");
+          $scope = $rootScope.$new();
+        //  console.log($scope);
+          $scope.$apply()
+         
+           // expect($location.path()).toBe('/Clients/CHRLSWB/06-30-2015');
+            expect($route.current.templateUrl).toBe('partials/_cRMPage.html');
+            expect($route.current.controller).toBe('ClientRMCSRCntrl');
+          })
+          
+  //  it('should have a mailctrl', inject(function($rootScope, $controller) {
+  //    }));
+});
 
+describe("ddApp", function() {
+     var $route, $rootScope, $location, $httpBackend;
+
+    beforeEach(function () {
+        module('ddApp');
+        inject(function($injector){
+            $route = $injector.get('$route');
+            $rootScope = $injector.get('$rootScope');
+            $location = $injector.get('$location');
+            $httpBackend = $injector.get('$httpBackend');
+            
+            $httpBackend.when('GET', 'partials/_cPage.html').respond('Clients');
+            
+            //console.log($location);
+          });
+
+    });
+     it('RM route Testing', function(){
+    // navigate using $apply to safely run the $digest cycle
+          $location.path("/Clients/EDLF0109122/06-30-2015");
+          $scope = $rootScope.$new();
+        //  console.log($scope);
+          $scope.$apply()
+         
+           // expect($location.path()).toBe('/Clients/CHRLSWB/06-30-2015');
+            expect($route.current.templateUrl).toBe('partials/_cSecPage.html');
+            expect($route.current.controller).toBe('ClientSecCntrl');
+          })
+          
+  //  it('should have a mailctrl', inject(function($rootScope, $controller) {
+  //    }));
+});
 
 
 
