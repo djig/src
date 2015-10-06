@@ -82,7 +82,7 @@ describe("ddApp", function() {
             $location = $injector.get('$location');
             $httpBackend = $injector.get('$httpBackend');
             
-            $httpBackend.when('GET', 'partials/_cPage.html').respond('Clients');
+            $httpBackend.when('GET', 'partials/_cRMPage.html').respond('Clients');
             
             //console.log($location);
           });
@@ -115,7 +115,7 @@ describe("ddApp", function() {
             $location = $injector.get('$location');
             $httpBackend = $injector.get('$httpBackend');
             
-            $httpBackend.when('GET', 'partials/_cPage.html').respond('Clients');
+            $httpBackend.when('GET', 'partials/_cSecPage.html').respond('Clients');
             
             //console.log($location);
           });
