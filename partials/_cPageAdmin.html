@@ -2,23 +2,23 @@
   {{vTabDescArr[vTab-1]}}
 </div>
 <div ng-class="openRSMenu" class="row">
-  <div     class="col-lg-12">
+  <div     class="col-lg-12 col-md-12">
      <div class='rightSide-content' >
       <div ng-show="isSetVeritical(1)" class="BoxesInnerContactsAdminData">
           <div   class="row">
-            <div     class="col-lg-2">
+            <div     class="col-lg-2 col-md-3">
            <input type="checkbox"   ng-model="contacts.all" class="js-switch chkAll" ui-switch /><span class="contactButtonText">{{allCnt}} ALL </span>
             </div>
-            <div     class="col-lg-2">
+            <div     class="col-lg-2 col-md-3">
               <input id="chkPrimary" type="checkbox" ng-model="contacts.primary" class="js-switch chkNonAll" ui-switch /><span class="contactButtonText"> {{primaryCnt}} Primary </span>
             </div>
-            <div     class="col-lg-2">
+            <div     class="col-lg-2 col-md-3">
               <input type="checkbox" ng-model="contacts.DFE" class="js-switch chkNonAll" ui-switch /><span class="contactButtonText">{{contacts.dfeCnt}} DFE </span>
               </div>
-          <div     class="col-lg-2">
+          <div     class="col-lg-2 col-md-3">
            <input type="checkbox" ng-model="contacts.billing" class="js-switch chkNonAll" ui-switch /><span class="contactButtonText">{{billingCnt}} Billing </span>
            </div>
-             <div     class="col-lg-3">
+             <div     class="col-lg-3 col-md-3">
            <input type="checkbox" ng-model="contacts.authorized" class="js-switch chkNonAll" ui-switch /><span class="contactButtonText">{{authorizedCnt}} Authorized Signer </span>
            </div>
          </div>
@@ -49,7 +49,7 @@
               {{selectedContact.person_name}}
             </span>&nbsp;&nbsp;{{selectedContact.entity_name}}  </div> 
             <div class="row">
-                <div class="col-lg-4 ContactCardRight"> 
+                <div class="col-lg-4 col-md-4  ContactCardRight"> 
                     <table border="0"><tbody><tr class="AcctDetailsROw"><td>Authorized Signer</td><td>{{selectedContact.signator}}</td></tr>
                     <tr class="AcctDetailsAlternateROw"><td> Primary</td><td>{{selectedContact.primary_contact}}</td></tr>
                     <tr class="AcctDetailsROw"><td> DFE</td><td>{{selectedContact.dfe_report}}</td></tr>
@@ -57,7 +57,7 @@
                     <tr class="AcctDetailsROw"><td> ICC</td><td> </td></tr></tbody>
                     </table>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-8 col-md-8">
                     <table border="0" cellspacing="5"> <tbody><tr><td colspan="3"> 
                     {{selectedContact.PHONES}}  </td> </tr><tr><td colspan="3"><a href="mailto:Rick.Bratthauer@schwab.com"> {{selectedContact.e_mail_address}} </a> </td></tr><tr><td colspan="3">{{selectedContact.mail_address}}</td></tr><tr><td>{{selectedContact.mail_city}}</td><td td="">{{selectedContact.mail_state}} - {{selectedContact.mail_zip}}</td> <td>{{selectedContact.mail_country}}</td></tr></tbody></table> 
                      <span class="contacts"><a href ng-click="closeContact()" >Close</a></span>
@@ -73,7 +73,7 @@
       </div>
       <div class="BoxesInnerContactsAdminData" ng-show="isSetVeritical(3)">
         <div class="row">
-            <div class="col-lg-11">
+            <div class="col-lg-11 col-md-12">
              <hc-col  
              options={height:201,width:500,colorsPallete:["rgba(0,255,0,.5)","rgba(255,0,0,.5)"]} 
              dataset="cashflows"  
