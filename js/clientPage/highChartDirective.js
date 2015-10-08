@@ -2,16 +2,19 @@ ddApp.directive('hcCol', function() {
   return {
   	 
       restrict: 'EA',
+      require: '?ngModel',   
       scope: { 
+
+      	selected: '=',
       	dataset: '=',
           series:  '=',
           totals : '=',
-           
-          options: '='
+          options: '=' 
+          
       },
       templateUrl: "partials/_highChartBar.html",
   
-        link: function(scope, element, attr) {
+        link: function(scope, element, attr, ngModel) {
         	
 
         	  scope.$watch( "dataset",
@@ -29,7 +32,7 @@ ddApp.directive('hcCol', function() {
 
         	  function initilize(){
 
-
+        	  		console.log(scope);
 
 		        	var dseries = [];
 		            var gValues = [];
@@ -124,6 +127,14 @@ ddApp.directive('hcCol', function() {
 		                                click: function() {
 		                                     console.log('Category: ' + this.category + ', value: ' + this.y);
 		                                    //PopulateCashFlowPopup(this.category, dataInput,modeofload);
+		                                    selectedDs = {Category:  this.category , value:  this.y };
+		                                    scope.selected =2;
+		                                    scope.$apply(function () {
+                     
+										                    ngModel.$setViewValue(selectedDs);
+										                });
+		                                     
+		                                              
 		                                }
 		                           
 		                            }

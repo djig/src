@@ -1,20 +1,20 @@
 ﻿<div class="row">
-    <div class="col-lg-11">
+    <div class="col-lg-11 col-md-11">
         <div class="row ">
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-12">
                 <div class="searchBox">
 
                     <input class='typeahead' type="text" ad-typeahead  options="exampleOptions" datasets="searchDS" ng-model="selectedNumber">
                 </div>
                 <div class="alert alert-danger" ng-show="bSearch">loading Seaching Box....</div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 col-md-12">
 
 
                           <div ng-show="d3Chart===true&&bAsofDateMVBar==true?true:false"      class="row zoomAsOfDate bar-show-hide ">
 
-                               <div  ng-repeat="item in D3AsofDS"  id={{item.d3Enid}}   class="{{$index === 0 ? 'col-lg-3  mainC1' : 'col-lg-3  mainC1 marg'}} ">
+                               <div  ng-repeat="item in D3AsofDS"  id={{item.d3Enid}}   class="{{$index === 0 ? 'col-lg-3 col-md-4 mainC1' : 'col-lg-3  col-md-4  mainC1 marg'}} ">
                                  <d3-Aot id="d3Aot"+{{item.year}}      options={year:item.year,factor:.94,acitiveLabel:item.acitiveLabel} vals=item.vals lables=item.lables></d3-Aot>
                                </div>
                           </div>
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-  <div class="col-lg-1">
+  <div class="col-lg-1 col-md-1">
        <a href ng-click="d3Chart = !d3Chart" ng-show="bAsofDateMVBar"  class="btn btn-primary btn-sm">{{d3Chart === true ? "R" : "R"}}</a>
     </div>
   </div>

@@ -74,11 +74,11 @@
       <div class="BoxesInnerContactsAdminData" ng-show="isSetVeritical(3)">
         <div class="row">
             <div class="col-lg-11 col-md-12">
-             <hc-col  
+             <hc-col  selected="selectedCashflowEntry"
              options={height:201,width:500,colorsPallete:["rgba(0,255,0,.5)","rgba(255,0,0,.5)"]} 
              dataset="cashflows"  
              series="scols"  
-             totals="cashflowTotals"  >
+             totals="cashflowTotals" ng-model="selectedCashflowEntry" >
                     </hc-col>
                 
             </div>

@@ -3977,12 +3977,9 @@ padding-left: 10px;
 padding-top: 10px;
 
 margin-left: 10px;
-width: 572px;
+/*width: 572px;*/
 height:240px;
-/*background: -webkit-linear-gradient(top, rgba(220,234,252,.6), #FFFFFF, #FFFFFF 70%, #FFFFFF);*/
-/*-webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
--moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-box-shadow: 0 5px 10px rgba(0,0,0,.2);*/
+ 
  background: radial-gradient(rgba(250, 250, 250, 0) 0, rgba(255,255,255,.15) 30%, rgba(255,255,255,.3) 32%, rgba(255,255,255,0) 33%) 0 0, radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.3) 13%, rgba(255,255,255,0) 14%) 0 0, radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 17%, rgba(255,255,255,.43) 19%, rgba(255,255,255,0) 20%) 0 110px, radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) -130px -170px, radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) 130px 370px, radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.2) 13%, rgba(255,255,255,0) 14%) 0 0,
      /*linear-gradient(90deg, #FFFFFF 0%, #EEF0F1 20%, #FFFFFF 30%, #ECEFFF 40%, #FFFFFF 50%, #ECF0FA 60%, #E4E9F1 70%, #EFF5FD 80%, #F8F8F8 90%, #FFFFFF 100%);*/
 

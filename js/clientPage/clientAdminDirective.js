@@ -5,7 +5,16 @@ ddApp.directive('clientAdmin', function () {
         templateUrl: "partials/_cPageAdmin.html",
          controller: ['$scope', '$location', '$routeParams',  'Utility', 'typeheadDSFactory', 'ApplicationLog', 'appSetting', '$http', 'RemoteData','$timeout',
                   function ($scope, $location,$routeParams,  Utility, typeheadDSFactory, ApplicationLog, appSetting, $http, RemoteData,$timeout) {
+                     $scope.selectedCashflowEntry= 0;
+                        
 
+                        $scope.$watch( "selectedCashflowEntry", function( newValue ) {
+                          //console.log(newValue);
+                          if(newValue!==undefined){
+                             console.log(newValue);
+                          }
+
+                        } );
                     $scope.ClientCode = $routeParams.ClientCode;
                     $scope.asofdate=$routeParams.asofdate;
                     $scope.vTab=1;
@@ -204,12 +213,8 @@ ddApp.directive('clientAdmin', function () {
 
                         });
 
-
-
-
-
-
-
+                        
+                       
 
 
 
