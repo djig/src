@@ -11,11 +11,9 @@ var jasmineBrowser = require('gulp-jasmine-browser');
 var watch = require('gulp-watch');
 var karma = require('gulp-karma');
 
-
-/*For Javascript Folder and sub folder Excluding Vendor Folder.
+/*ForJavascript Folder and sub folder Excluding Vendor Folder.
 Dependency on Cleaning and loading partials */
 gulp.task("assetsJS",['clean','partials'],  function(cb){
-//  cb(err);.pipe(revDel({ dest: './dest/js/' }))
 var manifest = gulp.src(["./dest/partials/rev-manifest.json"]);
   return gulp.src([  '!./src/js/Vendor',
                     '!./src/js/Vendor/**',
